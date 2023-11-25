@@ -1,0 +1,1 @@
+cmd /C "C:\Users\aydin\.vscode-insiders\extensions\redhat.java-1.24.0-win32-x64\jre\17.0.8.1-win32-x86_64\bin\java.exe @C:\Users\aydin\AppData\Local\Temp\cp_bjcpr7cr5x4ot30xodwdpt256.argfile com.school.bookstore.BookstoreApplication "
