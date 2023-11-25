@@ -1,9 +1,10 @@
+import Link from "next/link"
 
 export default async function Home() {
   const data = await fetch("http://localhost:8080/api/books", {})
   const books = await data.json()
 
-  console.log("Books: ", books)
+  // console.log("Books: ", books)
 
   return (
     <>Bookstore Test Here data comes from server:
@@ -15,6 +16,7 @@ export default async function Home() {
       <span>{book.numPages}</span>
      </div>)}
     </div>
+     <Link href={"/staff"} className="bg-green-400 border border-green-400">Go to staff</Link>
     </>
   )
 }

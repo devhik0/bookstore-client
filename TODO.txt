@@ -1,0 +1,5 @@
+- add eslint, prettir,tsconfig and config
+- add shadcn ui to style UI, and lucide icons
+- add home page, layout, books page, /books/:id page, staff page and style
+- /, /books, /book/:id, /staff, /staff/:id
+- add types to Entities
