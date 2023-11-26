@@ -1,3 +1,3 @@
-- add home page, layout, books page, /books/:id page, staff page and style                 
+- add books page, /books/:id page, staff page and style                 
 - /, /books, /book/:id, /staff, /staff/:id
 - add types to Entities

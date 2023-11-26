@@ -1,30 +1,22 @@
 import { Button } from "@/components/ui/button";
-import { Camera } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const data = await fetch("http://localhost:8080/api/books", {});
-  const books = await data.json();
-
-  // console.log("Books: ", books)
-
   return (
-    <>
-      Bookstore Test Here data comes from server:
-      <div style={{ border: "1px solid green", padding: "1rem" }}>
-        {books.map((book) => (
-          <div key={book.id} style={{ border: "1px solid blue", margin: "1rem", padding: "1rem" }}>
-            <h3>{book.title}</h3>
-            <span>{book.yearPublished}</span>
-            <p>{book.description}</p>
-            <span>{book.numPages}</span>
-          </div>
-        ))}
+    <div className="w-full h-full">
+      <div className="">
+        <Image src={"/hero-banner.jpg"} width={1400} height={500} alt="hero-banner" className="opacity-100" />
+        <div className="absolute top-[12%] left-[20%]">
+          <h1 className="text-5xl font-bold text-orange-900">
+            Find your favorite book at your fingertips,
+            <br /> <span className="text-gray-100 underline">in seconds</span>
+          </h1>
+        </div>
+        <Link href={"/books"}>
+          <Button className="absolute top-[40%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-orange-800">Search now</Button>
+        </Link>
       </div>
-      <Button>
-        <Link href={"/staff"}>Go to staff</Link>
-      </Button>
-      <Camera color="red" size={48} />
-    </>
+    </div>
   );
 }

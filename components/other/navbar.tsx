@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -8,11 +9,10 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <div className="bg-orange-800 flex justify-between p-2">
+    <div className="bg-orange-800 flex justify-between py-1 px-2">
       <NavigationMenu>
         <div>
           <Image src={"/logo.png"} width={64} height={64} alt="logo" />
