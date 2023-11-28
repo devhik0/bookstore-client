@@ -16,6 +16,11 @@ export default async function Home() {
         <Link href={"/books"}>
           <Button className="absolute top-[40%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-orange-800">Search now</Button>
         </Link>
+        {/* for testing only ! */}
+        <Link href={"/staff"} className="absolute top-[50%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-green-800">
+          Staff
+        </Link>
+        {/* for testing only ! */}
       </div>
     </div>
   );
