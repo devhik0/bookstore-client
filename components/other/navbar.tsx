@@ -15,7 +15,9 @@ export default function Navbar() {
     <div className="bg-orange-800 flex justify-between py-1 px-2">
       <NavigationMenu>
         <div>
-          <Image src={"/logo.png"} width={64} height={64} alt="logo" />
+          <Link href={"/"}>
+            <Image src={"/logo.png"} width={64} height={64} alt="logo" />
+          </Link>
         </div>
         <NavigationMenuList>
           <div className="flex gap-4">

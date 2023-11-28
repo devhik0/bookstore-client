@@ -1,4 +1,3 @@
-- fix image upload !
 - add books page, /books/:id page, staff page and style                 
 - /, /books, /book/:id, /staff, /staff/:id
 - add types to Entities

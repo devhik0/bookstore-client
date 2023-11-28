@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Books() {
+  const data = await fetch("http://localhost:8080/api/books");
+  const books = await data.json();
+
   return (
     <div className="w-full h-[100vh] text-center">
       <h2 className="text-xl text-center m-2">Books</h2>
@@ -23,20 +26,20 @@ export default async function Books() {
               </select>
             </div>
             <div className="flex flex-wrap gap-6 justify-center">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((book, i) => {
+              {books.map((book) => {
                 return (
-                  <div key={i}>
+                  <div key={book.id}>
                     <Card>
-                      <Image src={"/book-1.jpg"} width={280} height={30} alt="book-img" />
+                      <Image src={book.imageLink} width={280} height={30} alt="book-img" />
                       <CardHeader>
-                        <CardTitle>Book Title {book}</CardTitle>
-                        <CardDescription>Book Description</CardDescription>
+                        <CardTitle>Book Title {book.title}</CardTitle>
+                        <CardDescription>Book Description {book.Description}</CardDescription>
                       </CardHeader>
                       <CardContent>
                         <p>Book Content</p>
                       </CardContent>
                       <CardFooter className="gap-4">
-                        <Link href={`books/${i}`}>
+                        <Link href={`books/${book.id}`}>
                           <Button className="bg-orange-800">View Details</Button>
                         </Link>
                         <Link href={`/cart`}>

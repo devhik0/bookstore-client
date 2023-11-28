@@ -1,22 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 "use client";
 
 import { useState } from "react";
 import { Button } from "../ui/button";
 
 export default function Upload({ uploadBook }) {
-  const [file, setFile] = useState(null);
+  const [, setFile] = useState<File | null>(null);
 
   return (
-    // ! here is problem cuz of server actions
-    <form action={() => uploadBook(file)}>
-      {/* fictional book inputs like title */}
+    <form action={uploadBook}>
+      {/* add fictional book inputs like title */}
+      <input type="text" name="title" />
       <input
+        name="file"
         type="file"
         onChange={(e) => {
-          setFile(e.target.files[0]);
-          console.log("File added");
+          const image = e.currentTarget.files![0];
+          setFile(image);
+          console.log("Image added: ", image);
         }}
       />
       <Button type="submit">Upload Book</Button>
