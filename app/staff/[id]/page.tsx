@@ -1,4 +1,5 @@
 import Upload from "@/components/other/book-upload";
+import { revalidatePath } from "next/cache";
 
 export default async function StaffInfo({ params }) {
   const data = await fetch(`http://localhost:8080/api/staff/${params.id}`);
@@ -10,21 +11,25 @@ export default async function StaffInfo({ params }) {
       throw Error("Please add a file");
     }
 
+    const formData = new FormData();
+    formData.append("file", file);
+    // console.log("File at server: ", file);
+    // console.log("FormData: ", formData.get("file"));
+    // console.log("Book ID: ", id);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      console.log("File at server: ", file);
       const res = await fetch(`http://localhost:8080/api/books/${id}/cover`, {
-        method: "patch",
+        method: "PATCH",
         body: formData,
       });
-      if (!res) {
-        console.log("Error while adding book");
+      if (!res.ok) {
+        console.log("Error while adding book image: ", res.status);
+      } else {
+        console.log(`Added cover to book: ${id}`);
       }
-      console.log(`Added cover to book: ${id}`);
     } catch (error) {
       console.log("Error at cover: ", error);
     }
+    revalidatePath("/books");
   };
 
   const uploadBook = async (formData) => {
@@ -50,23 +55,28 @@ export default async function StaffInfo({ params }) {
 
     try {
       const data = await fetch("http://localhost:8080/api/books", {
-        method: "post",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: bookData,
       });
-      const book = await data.json();
-      const id = book?.id;
-      console.log("Book id: ", id);
-      console.log("Added book: ", book);
-      if (file.size > 0) {
-        await addBookImage(file, id);
-        console.log("Added book with image: ", file);
+      if (!data.ok) {
+        console.log("Error while adding book data", data.status);
       } else {
-        console.log("Added book without image but id: ", id);
+        const book = await data.json();
+        const id = book?.id;
+        // console.log("Added book: ", book.title);
+        if (file.size > 0) {
+          // console.log("File, Size: ", [file.name, file.size]);
+          console.log("Added book with image: ", file.name);
+          await addBookImage(file, id);
+        } else {
+          console.log("Added book without image but id: ", id);
+        }
       }
     } catch (error) {
       console.log("Error at add: ", error);
     }
+    revalidatePath("/books");
   };
 
   return (

@@ -16,7 +16,7 @@ export default function Upload({ uploadBook }) {
         onChange={(e) => {
           const image = e.currentTarget.files![0];
           setFile(image);
-          console.log("Image added: ", image);
+          // console.log("Image added: ", image);
         }}
       />
       <Button type="submit">Upload Book</Button>
