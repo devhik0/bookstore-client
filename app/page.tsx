@@ -1,6 +1,5 @@
 import SearchHome from "@/components/other/search-home";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -14,13 +13,13 @@ export default async function Home() {
           </h1>
         </div>
 
-        <div className="absolute top-[30%] left-[33%] mt-4 bg-orange-800">
+        <div className="absolute top-[40%] left-[26%] mt-4 bg-gray-200">
           <SearchHome />
         </div>
         {/* for testing only ! */}
-        <Link href={"/staff"} className="absolute top-[50%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-green-800">
+        {/* <Link href={"/staff"} className="absolute top-[50%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-green-800">
           Staff
-        </Link>
+        </Link> */}
         {/* for testing only ! */}
       </div>
     </div>

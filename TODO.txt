@@ -1,5 +1,1 @@
->>> Book Results filters for genre and language.
-
-Should hit endpoint with get /books?title=title&author=author&genre=null
-
-parameters title, author, genre and language
+**

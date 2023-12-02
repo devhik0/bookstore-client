@@ -8,9 +8,8 @@ export default function SearchBooks() {
   const [query, setQuery] = useState("");
 
   return (
-    <form className="border-2 border-green-800 p-4 flex gap-4 justify-between items-center">
-      <label className="w-full">Search for...</label>
-      <div className="flex gap-4 w-full">
+    <form className="p-4 flex gap-4 justify-between items-center w-[60%]">
+      <div className="flex gap-4 w-full items-center">
         <input
           name="query"
           type="search"
@@ -19,10 +18,12 @@ export default function SearchBooks() {
             setQuery(e.target.value);
           }}
           placeholder="Search for title or author"
-          className="p-2"
+          className="p-2 w-full border border-orange-800"
         />
         <Link href={query ? `/books?searchString=${query}` : `/books`}>
-          <Button type="submit">Search</Button>
+          <Button type="submit" className="bg-orange-800">
+            Search
+          </Button>
         </Link>
       </div>
     </form>
