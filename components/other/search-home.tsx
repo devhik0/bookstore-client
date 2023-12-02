@@ -21,7 +21,7 @@ export default function SearchHome() {
           placeholder="Search for title or author"
           className="p-2"
         />
-        <Link href={query ? `/books?title=${query}` : `/books`}>
+        <Link href={query ? `/books?searchString=${query}` : `/books`}>
           <Button type="submit">Search</Button>
         </Link>
       </div>
