@@ -1,10 +1,9 @@
+import { Staff } from "@/lib/types";
 import Link from "next/link";
-
-// For staff list
 
 const Staff = async () => {
   const data = await fetch("http://localhost:8080/api/staff");
-  const staff = await data.json();
+  const staff = (await data.json()) as Staff[];
 
   // console.log(staff);
 

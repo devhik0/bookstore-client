@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
+import { Book } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Book({ params }) {
-  const data = await fetch(`http://localhost:8080/api/books/${params.id}`);
-  const book = await data.json();
+export type BookDetails = Book & { authorNameList: string[]; genreTagList: string[] };
 
-  const discountAmount = ((book.priceBeforeDiscount || 50) * book.discountPercent) / 100;
-  const discountedPrice = (book.priceBeforeDiscount || 50) - discountAmount;
+export default async function Book({ params }: { params: { id: number } }) {
+  const data = await fetch(`http://localhost:8080/api/books/${params.id}`);
+  const book = (await data.json()) as BookDetails;
+
+  const discountAmount = (book.priceBeforeDiscount * book.discountPercent) / 100;
+  const discountedPrice = book.priceBeforeDiscount - discountAmount;
 
   return (
     <div className="p-4 border border-orange-900 m-4">
@@ -33,11 +36,11 @@ export default async function Book({ params }) {
           <span className="bg-cyan-400 p-2">{book.publisher}</span>
           <span className="p-2 bg-gray-300">{book.yearPublished}</span> <br />
           <span className="p-2 bg-red-300">{book.language}</span> <br />
-          <span className="p-2 bg-yellow-300">{book.numPages}</span> <br />
+          <span className="p-2 bg-yellow-300">{book.numPages} Pages</span> <br />
         </div>
-        <p className="m-4 p-4 bg-gray-200">{book.description || "A book desc"}</p>
+        <p className="m-4 p-4 bg-gray-200">{book.description}</p>
         <div className="flex flex-row gap-2 items-center my-4">
-          <span className="line-through">$ {book.priceBeforeDiscount || 50}</span>
+          <span className="line-through">$ {book.priceBeforeDiscount}</span>
           <span className="text-red-500"> -%{book.discountPercent}</span> <br />
           <span className="bg-lime-200 p-2">$ {discountedPrice}</span>
         </div>

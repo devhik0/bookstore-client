@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-export default function Upload({ uploadBook }) {
+export default function Upload({ uploadBook }: { uploadBook: (formData: FormData) => Promise<void> }) {
   const [, setFile] = useState<File | null>(null);
 
   return (

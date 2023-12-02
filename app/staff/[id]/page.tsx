@@ -1,11 +1,12 @@
 import Upload from "@/components/other/book-upload";
+import { Staff } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
-export default async function StaffInfo({ params }) {
+export default async function StaffInfo({ params }: { params: { id: number } }) {
   const data = await fetch(`http://localhost:8080/api/staff/${params.id}`);
-  const staffInfo = await data.json();
+  const staffInfo = (await data.json()) as Staff;
 
-  const addBookImage = async (file, id) => {
+  const addBookImage = async (file: File, id: number) => {
     "use server";
     if (!file) {
       throw Error("Please add a file");
@@ -32,12 +33,12 @@ export default async function StaffInfo({ params }) {
     revalidatePath("/books");
   };
 
-  const uploadBook = async (formData) => {
+  const uploadBook = async (formData: FormData) => {
     "use server";
 
     // form fields
-    const title = formData.get("title");
-    const file = formData.get("file");
+    const title = formData.get("title") as string;
+    const file = formData.get("file") as File;
 
     const bookData = JSON.stringify({
       title,

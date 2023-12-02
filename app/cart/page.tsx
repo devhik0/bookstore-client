@@ -1,3 +1,3 @@
-export default async function Cart({ params }) {
+export default async function Cart() {
   return <div>Cart</div>;
 }

@@ -1,6 +1,7 @@
 import Navbar from "@/components/other/navbar";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { ReactNode } from "react";
 import "./globals.css";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   description: "A bookstore for your favorite books",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={roboto.className}>

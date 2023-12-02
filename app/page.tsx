@@ -1,20 +1,8 @@
+import SearchHome from "@/components/other/search-home";
 import Image from "next/image";
 import Link from "next/link";
 
-// TODO: Add searchbar here
-
 export default async function Home() {
-  // const query = {
-  //   title: "sdfg",
-  // };
-
-  // const search = async () => {
-  //   "use server";
-  //   const formData = new FormData();
-  //   const data = formData.get("query");
-  //   console.log("Book: ", data);
-  // };
-
   return (
     <div className="w-full h-full">
       <div className="">
@@ -27,15 +15,7 @@ export default async function Home() {
         </div>
 
         <div className="absolute top-[30%] left-[33%] mt-4 bg-orange-800">
-          {/* <form action={search} className="border-2 border-green-800 p-4 flex gap-4 justify-between items-center">
-            <label className="w-full">Search for...</label>
-            <div className="flex gap-4 w-full">
-              <input name="query" type="search" placeholder="Search for title or author" className="p-2" />
-              <Link href={`/books?title=${query.title}`}>
-                <Button type="submit">Search</Button>
-              </Link>
-            </div>
-          </form> */}
+          <SearchHome />
         </div>
         {/* for testing only ! */}
         <Link href={"/staff"} className="absolute top-[50%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-green-800">
