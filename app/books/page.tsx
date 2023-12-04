@@ -1,6 +1,6 @@
-import Filters from "@/components/other/filters";
-import SearchBooks from "@/components/other/search-books";
-import Sorts from "@/components/other/sorts";
+import Search from "@/app/_components/search";
+import Filters from "@/app/books/filters";
+import Sorts from "@/app/books/sorts";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Books } from "@/lib/types";
@@ -46,7 +46,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
         <div className="w-[79vw] ">
           <div className="flex flex-col mt-1 mx-2 w-[97%]">
             <div className="flex justify-end m-2 gap-4">
-              <SearchBooks />
+              <Search where="books" />
               <Sorts />
             </div>
             <div className="flex flex-wrap gap-2 justify-center">

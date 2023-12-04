@@ -1,4 +1,4 @@
-import Navbar from "@/components/other/navbar";
+import Navbar from "@/app/navbar";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";

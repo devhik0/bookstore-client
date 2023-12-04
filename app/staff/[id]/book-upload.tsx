@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../../components/ui/button";
 
 export default function Upload({ uploadBook }: { uploadBook: (formData: FormData) => Promise<void> }) {
   const [, setFile] = useState<File | null>(null);

@@ -1,15 +1,14 @@
 "use client";
-
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 
-export default function SearchBooks() {
+export default function Search({ where }: { where?: "home" | "books" }) {
   const [query, setQuery] = useState("");
 
   return (
-    <form className="p-4 flex gap-4 justify-between items-center w-[60%]">
-      <div className="flex gap-4 w-full items-center">
+    <form className="p-4 flex gap-4 justify-between items-center w-[50vw]">
+      <div id={where} className="flex gap-4 w-full items-center">
         <input
           name="query"
           type="search"

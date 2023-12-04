@@ -1,4 +1,4 @@
-import Upload from "@/components/other/book-upload";
+import Upload from "@/app/staff/[id]/book-upload";
 import { Staff } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 

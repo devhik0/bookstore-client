@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 
 export default function Filters() {
   const [lang, setLang] = useState("");
