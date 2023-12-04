@@ -1,13 +1,10 @@
+import { getBook } from "@/app/_actions/getBook";
 import { Button } from "@/components/ui/button";
-import { Book } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export type BookDetails = Book & { authorNameList: string[]; genreTagList: string[] };
-
 export default async function Book({ params }: { params: { id: number } }) {
-  const data = await fetch(`http://localhost:8080/api/books/${params.id}`);
-  const book = (await data.json()) as BookDetails;
+  const book = await getBook(params);
 
   const discountAmount = (book.priceBeforeDiscount * book.discountPercent) / 100;
   const discountedPrice = book.priceBeforeDiscount - discountAmount;

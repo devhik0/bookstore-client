@@ -9,7 +9,7 @@ export default function Filters() {
   const [genre, setGenre] = useState("");
 
   return (
-    <div className="">
+    <div>
       <form className="flex gap-4 flex-col justify-center">
         <div className="flex flex-col gap-2 justify-around  p-2">
           <h3>Filter by Genre</h3>

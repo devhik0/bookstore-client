@@ -16,11 +16,6 @@ export default async function Home() {
         <div className="absolute top-[40%] left-[26%] mt-4 bg-gray-200">
           <Search where="home" />
         </div>
-        {/* for testing only ! */}
-        {/* <Link href={"/staff"} className="absolute top-[50%] left-[40%] mt-4 p-4 text-xl w-[20%] bg-green-800">
-          Staff
-        </Link> */}
-        {/* for testing only ! */}
       </div>
     </div>
   );

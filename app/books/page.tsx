@@ -3,39 +3,13 @@ import Filters from "@/app/books/filters";
 import Sorts from "@/app/books/sorts";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Books } from "@/lib/types";
+import { Books, SearchParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-
-type SearchParams = { searchString: string; genre: string; language: string };
-
-const getBooks = async (params: SearchParams) => {
-  if (params.searchString) {
-    const data = await fetch(`http://localhost:8080/api/books?searchString=${params.searchString}`);
-    return (await data.json()) as Books;
-  } else {
-    if (params.genre && params.language) {
-      const data = await fetch(`http://localhost:8080/api/books?genre=${params.genre}&language=${params.language}`);
-      return (await data.json()) as Books;
-    }
-    if (params.genre && !params.language) {
-      const data = await fetch(`http://localhost:8080/api/books?genre=${params.genre}`);
-      return (await data.json()) as Books;
-    } else if (!params.genre && params.language) {
-      const data = await fetch(`http://localhost:8080/api/books?language=${params.language}`);
-      return (await data.json()) as Books;
-    } else {
-      const data = await fetch(`http://localhost:8080/api/books`);
-      return (await data.json()) as Books;
-    }
-  }
-};
+import { getBooks } from "../_actions/getBooks";
 
 export default async function Books({ searchParams }: { searchParams: SearchParams }) {
   const books = (await getBooks(searchParams)) as Books;
-
-  // console.log("DATA: ", books);
-  // console.log("lang: ", searchParams.language);
 
   return (
     <div className="w-full h-[100vh] text-center">
