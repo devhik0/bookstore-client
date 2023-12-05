@@ -1,4 +1,5 @@
 import Navbar from "@/app/navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { ReactNode } from "react";
@@ -13,11 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={roboto.className}>
         <Navbar />
         {children}
       </body>
     </html>
+    </ClerkProvider>
   );
 }
