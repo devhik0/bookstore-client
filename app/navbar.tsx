@@ -31,10 +31,7 @@ export default function Navbar() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Avatar
-                <UserButton afterSignOutUrl="/" />
-              </NavigationMenuLink>
+              <UserButton afterSignOutUrl="/" />
             </NavigationMenuItem>
           </div>
         </NavigationMenuList>
