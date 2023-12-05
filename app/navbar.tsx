@@ -1,5 +1,6 @@
 "use client";
 
+import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -28,6 +29,12 @@ export default function Navbar() {
               <Link href="/signup" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>Signup</NavigationMenuLink>
               </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Avatar
+                <UserButton afterSignOutUrl="/" />
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </div>
         </NavigationMenuList>
