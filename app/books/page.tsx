@@ -50,16 +50,9 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                         <CardContent>
                           <p className="font-bold text-xl">{book.priceBeforeDiscount} €</p>
                         </CardContent>
-                        <CardFooter className="flex gap-2">
-                          <Link href={`books/${book.id}`}>
-                            <Button className="bg-orange-800" size={"sm"}>
-                              View Details
-                            </Button>
-                          </Link>
-                          <Link href={`/cart`}>
-                            <Button className="bg-orange-800" size={"sm"}>
-                              Add to Cart
-                            </Button>
+                        <CardFooter>
+                          <Link href={`books/${book.id}`} className="w-full">
+                            <Button className="bg-orange-800 w-full">View Details</Button>
                           </Link>
                         </CardFooter>
                       </Card>
