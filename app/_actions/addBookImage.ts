@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/lib/constants";
 import { revalidatePath } from "next/cache";
 
 export const addBookImage = async (file: File, id: number) => {
@@ -12,7 +13,7 @@ export const addBookImage = async (file: File, id: number) => {
   // console.log("FormData: ", formData.get("file"));
   // console.log("Book ID: ", id);
   try {
-    const res = await fetch(`http://localhost:8080/api/books/${id}/cover`, {
+    const res = await fetch(`${BASE_URL}/books/${id}/cover`, {
       method: "PATCH",
       body: formData,
     });

@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/lib/constants";
 import { revalidatePath } from "next/cache";
 import { addBookImage } from "./addBookImage";
 
@@ -23,7 +24,7 @@ export const uploadBook = async (formData: FormData) => {
   });
 
   try {
-    const data = await fetch("http://localhost:8080/api/books", {
+    const data = await fetch(`${BASE_URL}/books`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: bookData,
