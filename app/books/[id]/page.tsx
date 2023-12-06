@@ -51,7 +51,7 @@ export default async function Book({ params }: { params: { id: number } }) {
 
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="bg-orange-800">Add to cart</Button>
+          <Button className="bg-accent">Add to cart</Button>
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
@@ -95,7 +95,7 @@ export default async function Book({ params }: { params: { id: number } }) {
             </SheetDescription>
           </SheetHeader>
           <Link href={`/cart`}>
-            <Button className="w-[90%] absolute bottom-2 right-4 bg-orange-800">Order Now</Button>
+            <Button className="w-[90%] absolute bottom-2 right-4 bg-accent">Order Now</Button>
           </Link>
         </SheetContent>
       </Sheet>

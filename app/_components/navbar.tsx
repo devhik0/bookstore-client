@@ -12,13 +12,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "../components/ui/navigation-menu";
+} from "../../components/ui/navigation-menu";
 
 export default function Navbar() {
   const { userId } = useAuth();
 
   return (
-    <div className="bg-orange-800 flex justify-between py-1 px-2 items-center">
+    <div className="bg-accent flex justify-between py-1 px-2 items-center">
       <NavigationMenu>
         <Link href={"/"}>
           <Image src={"/logo.png"} width={64} height={64} alt="logo" />
@@ -95,7 +95,7 @@ export default function Navbar() {
                     </SheetDescription>
                   </SheetHeader>
                   <Link href={`/cart`}>
-                    <Button className="w-[90%] absolute bottom-2 right-4 bg-orange-800">Order Now</Button>
+                    <Button className="w-[90%] absolute bottom-2 right-4 bg-accent">Order Now</Button>
                   </Link>
                 </SheetContent>
               </Sheet>

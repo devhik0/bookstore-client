@@ -20,7 +20,7 @@ export default function Search({ where }: { where?: "home" | "books" }) {
           className="p-2 w-full border border-orange-800"
         />
         <Link href={query ? `/books?searchString=${query}` : `/books`}>
-          <Button type="submit" className="bg-orange-800">
+          <Button type="submit" className="bg-accent">
             Search
           </Button>
         </Link>

@@ -1,4 +1,4 @@
-import Navbar from "@/app/navbar";
+import Navbar from "@/app/_components/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";

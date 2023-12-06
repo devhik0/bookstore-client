@@ -68,7 +68,7 @@ export default async function Cart() {
             </Button>
           </form>
           <Link href={`/books`}>
-            <Button className="bg-orange-800">Continue Shopping</Button>
+            <Button className="bg-accent">Continue Shopping</Button>
           </Link>
         </div>
       </div>

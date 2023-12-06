@@ -52,7 +52,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                         </CardContent>
                         <CardFooter>
                           <Link href={`books/${book.id}`} className="w-full">
-                            <Button className="bg-orange-800 w-full">View Details</Button>
+                            <Button className="bg-accent w-full">View Details</Button>
                           </Link>
                         </CardFooter>
                       </Card>

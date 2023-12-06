@@ -13,9 +13,7 @@ export default function Filters() {
       <form className="flex gap-4 flex-col justify-center">
         <div className="flex flex-col gap-2 justify-around  p-2">
           <h3>Filter by Genre</h3>
-          <label
-            className={`flex gap-2 justify-between ${genre === "Fiction" ? "bg-orange-800 p-2 text-gray-100" : ""}`}
-          >
+          <label className={`flex gap-2 justify-between ${genre === "Fiction" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
               type="radio"
               checked={genre === "Fiction"}
@@ -24,7 +22,7 @@ export default function Filters() {
             />
             Fiction
           </label>
-          <label className={`flex gap-2 justify-between ${genre === "Drama" && "bg-orange-800 p-2 text-gray-100"}`}>
+          <label className={`flex gap-2 justify-between ${genre === "Drama" && "bg-accent p-2 text-gray-100"}`}>
             <input
               type="radio"
               checked={genre === "Drama"}
@@ -33,7 +31,7 @@ export default function Filters() {
             />
             Drama
           </label>
-          <label className={`flex gap-2 justify-between ${genre === "Adventure" && "bg-orange-800 p-2 text-gray-100"}`}>
+          <label className={`flex gap-2 justify-between ${genre === "Adventure" && "bg-accent p-2 text-gray-100"}`}>
             <input
               type="radio"
               checked={genre === "Adventure"}
@@ -46,9 +44,7 @@ export default function Filters() {
 
         <div className="flex flex-col gap-2 justify-around  p-2">
           <h3>Filter by Language</h3>
-          <label
-            className={`flex gap-2 justify-between ${lang === "ENGLISH" ? "bg-orange-800 p-2 text-gray-100" : ""}`}
-          >
+          <label className={`flex gap-2 justify-between ${lang === "ENGLISH" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
               type="radio"
               checked={lang === "ENGLISH"}
@@ -57,9 +53,7 @@ export default function Filters() {
             />
             ENGLISH{" "}
           </label>
-          <label
-            className={`flex gap-2 justify-between ${lang === "ROMANIAN" ? "bg-orange-800 p-2 text-gray-100" : ""}`}
-          >
+          <label className={`flex gap-2 justify-between ${lang === "ROMANIAN" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
               type="radio"
               checked={lang === "ROMANIAN"}
@@ -70,7 +64,7 @@ export default function Filters() {
           </label>
         </div>
         <Link href={`/books?genre=${genre}&language=${lang}`}>
-          <Button type="submit" className="w-full bg-orange-800">
+          <Button type="submit" className="w-full bg-accent">
             Filter
           </Button>
         </Link>

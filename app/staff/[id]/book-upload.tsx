@@ -29,7 +29,7 @@ export default function Upload({ uploadBook }: { uploadBook: (formData: FormData
             // console.log("Image added: ", image);
           }}
         />
-        <Button type="submit" className="bg-orange-800">
+        <Button type="submit" className="bg-accent">
           Upload Book
         </Button>
       </div>
