@@ -23,7 +23,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
               <Search where="books" />
               <Sorts />
             </div>
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-8 justify-center">
               {books.length === 0 ? (
                 <>There is no book here.</>
               ) : (
@@ -33,7 +33,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                       <Card>
                         <Image
                           src={book.imageLink}
-                          width={230}
+                          width={210}
                           height={210}
                           alt="book-img"
                           className="object-fit h-[250px]"

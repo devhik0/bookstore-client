@@ -7,7 +7,7 @@ export default function Search({ where }: { where?: "home" | "books" }) {
   const [query, setQuery] = useState("");
 
   return (
-    <form className="p-4 flex gap-4 justify-between items-center w-[50vw]">
+    <form className="p-4 flex gap-4 justify-between items-center ">
       <div id={where} className="flex gap-4 w-full items-center">
         <input
           name="query"
