@@ -37,7 +37,7 @@ export type Customer = {
 
 export type Order = {
   id: number;
-  createdAt: [string, string, string];
+  createdAt: Date;
   orderStatus: "IN PROGRESS" | "APPROVED";
   orderItems: { id: number; bookId: number; quantity: number }[];
   customerId: Customer["id"]; // 1: 1 Customer, Order
