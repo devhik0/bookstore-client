@@ -2,7 +2,7 @@ import Search from "@/app/_components/search";
 import Filters from "@/app/books/filters";
 import Sorts from "@/app/books/sorts";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Books, SearchParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,7 +45,6 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                             <span>{book.genreTagList}</span>
                             <span>{book.language}</span>
                           </div>
-                          <CardDescription>{book.description}</CardDescription>
                         </CardHeader>
                         <CardContent>
                           <p className="font-bold text-xl">{book.priceBeforeDiscount} €</p>

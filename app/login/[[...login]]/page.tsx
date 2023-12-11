@@ -1,9 +1,3 @@
-import { SignIn } from "@clerk/nextjs";
-
 export default async function Login() {
-  return (
-    <div className="flex justify-center m-4">
-      <SignIn />
-    </div>
-  );
+  return <div className="flex justify-center m-4">Login page</div>;
 }

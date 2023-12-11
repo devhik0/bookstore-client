@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { BASE_URL } from "@/lib/constants";
 import { Order } from "@/lib/types";
-import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default async function Cart() {
-  const { userId } = auth();
-
   const data = await fetch(`${BASE_URL}/orders/202`);
   const orders = (await data.json()) as Order[];
 
