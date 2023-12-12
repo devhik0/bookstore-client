@@ -5,8 +5,8 @@ import { Order } from "@/lib/types";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-export default async function Customer({ params }: { params: { id: number } }) {
-  const customer = await getCustomer(params.id);
+export default async function CustomerDashboard() {
+  const customer = await getCustomer();
 
   const getOrders = async () => {
     const token = cookies().get("auth_token")?.value as string;
@@ -25,7 +25,7 @@ export default async function Customer({ params }: { params: { id: number } }) {
 
   return (
     <>
-      Customer: {params.id}
+      Customer: {customer.id}
       <div>
         <h3>Customer Info</h3>
         <p>Email: {customer.email}</p>
@@ -35,15 +35,16 @@ export default async function Customer({ params }: { params: { id: number } }) {
         </div>
         <p>Full Name: {customer.fullName}</p>
         <p>Address: {customer.address}</p>
+        <p>Role: {customer.role}</p>
       </div>
-      <Link href={`/customers/${params.id}/staff-orders`}>
-        {customer.fullName === "oldcoder" ? (
+      <Link href={`/customers/${customer.id}/staff-orders`}>
+        {customer.role === "ROLE_STAFF" ? (
           <Button className="bg-blue-400">Staff Orders</Button>
         ) : (
           <Button className="bg-accent">Orders</Button>
         )}
       </Link>
-      {customer.fullName === "oldcoder" && (
+      {customer.role === "ROLE_STAFF" && (
         <div className="border border-gray-400 w-[80%] mx-auto my-4 p-2">
           <div className="w-full">
             {orders.map((order) => (

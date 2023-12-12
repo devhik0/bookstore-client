@@ -10,7 +10,7 @@ export default async function Home() {
         <br /> <span className="text-gray-800 underline">in seconds</span>
       </h1>
 
-      <div className="absolute top-[65%] w-full md:w-[50%] md:top-[55%] md:left-[25%] mt-4 bg-gray-200">
+      <div className="absolute top-[65%] w-full md:w-[50%] md:top-[45%] md:left-[25%] mt-4 bg-gray-200">
         <Search where="home" />
       </div>
     </div>

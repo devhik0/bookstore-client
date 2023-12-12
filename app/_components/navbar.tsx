@@ -1,6 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { LogIn as LoginIcon, UserPlus } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import Image from "next/image";
@@ -22,13 +30,13 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <div>
-      <NavigationMenu className="bg-accent flex flex-col md:flex-row">
-        <Link href={"/"}>
-          <Image src={"/logo.png"} width={64} height={64} alt="logo" />
-        </Link>
-        <NavigationMenuList className="flex flex-row gap-4 justify-between items-center px-2">
-          {!isLogged ? (
+    <NavigationMenu className="bg-accent flex flex-col md:flex-row">
+      <Link href={"/"}>
+        <Image src={"/logo.png"} width={64} height={64} alt="logo" />
+      </Link>
+      <NavigationMenuList className={`flex flex-row items-center m-2`}>
+        {!isLogged && (
+          <div className="flex flex-col gap-4 items-center p-2 md:flex-row ">
             <NavigationMenuItem>
               <Link href="/login" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -37,18 +45,6 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-          ) : (
-            <Button
-              onClick={() => {
-                cookies.remove("auth_token");
-                router.push("/");
-              }}
-            >
-              Logout
-            </Button>
-          )}
-
-          {!isLogged && (
             <NavigationMenuItem>
               <Link href="/signup" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -57,18 +53,46 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-          )}
+          </div>
+        )}
 
-          <NavigationMenuItem>
-            {/* user dropdown */}
-            User Dropdown
-          </NavigationMenuItem>
+        {isLogged && (
+          <div
+            className={`flex items-center ${!isLogged ? `flex-col mr-4 pt-2` : `flex-row justify-center px-2`}
+            `}
+          >
+            <NavigationMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link href={`/customers/my-account`}>Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      cookies.remove("auth_token");
+                      router.push("/");
+                    }}
+                  >
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <CartSheet isLogged={isLogged} />
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </div>
+            <NavigationMenuItem>
+              <CartSheet isLogged={isLogged} />
+            </NavigationMenuItem>
+          </div>
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }

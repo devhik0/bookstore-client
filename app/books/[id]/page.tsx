@@ -15,43 +15,42 @@ export default async function Book({ params }: { params: { id: number } }) {
   const isLogged = cookies().get("auth_token")?.value;
 
   return (
-    <div className="p-4 border border-orange-900 m-4">
-      <h3 className="text-2xl">Book Details</h3>
-      <div className="p-4">
-        <Image src={book.imageLink} alt="book-img" width={100} height={100} />
-        <h3 className="text-lg">Title: {book.title}</h3>
-        <div className="p-4">
+    <div className="p-2">
+      <div className="">
+        <Image src={book.imageLink} alt="book-img" width={1000} height={100} className="w-[20%] h-[30%]" />
+        <h3 className="text-lg mt-2">{book.title}</h3>
+        <div className="py-2">
           {book.authorNameList.map((author, idx) => (
-            <span className="bg-green-200 p-2" key={idx}>
+            <span className="" key={idx}>
               {author}
             </span>
           ))}
         </div>
-        <div className="p-4">
+        <div className="pt-2">
           {book.genreTagList.map((genre, idx) => (
-            <span className="bg-purple-200 p-2" key={idx}>
+            <span className="bg-gray-100 rounded-lg p-2 mr-1" key={idx}>
               {genre}
             </span>
           ))}
         </div>
-        <div className="flex gap-4 flex-col w-[10%]">
-          <span className="bg-cyan-400 p-2">{book.publisher}</span>
-          <span className="p-2 bg-gray-300">{book.yearPublished}</span> <br />
-          <span className="p-2 bg-red-300">{book.language}</span> <br />
-          <span className="p-2 bg-yellow-300">{book.numPages} Pages</span> <br />
+        <div className="flex flex-col w-full md:w-[10%] mt-4">
+          <p className="">{book.publisher}</p>
+          <p className="">{book.yearPublished}</p> <br />
+          <p className="">{book.language}</p> <br />
+          <p className="">{book.numPages} Pages</p> <br />
         </div>
-        <p className="m-4 p-4 bg-gray-200">{book.description}</p>
+        <p className="mt-2 ">{book.description}</p>
         <div className="flex flex-row gap-2 items-center my-4">
-          <span className="line-through">$ {book.priceBeforeDiscount}</span>
+          <span className="line-through">€ {book.priceBeforeDiscount}</span>
           <span className="text-red-500"> -%{book.discountPercent}</span> <br />
-          <span className="bg-lime-200 p-2">$ {discountedPrice}</span>
+          <span className="">€ {discountedPrice}</span>
+          <span className="">{book.copiesAvailable} Copies</span>
         </div>
-        <span className="mt-4 p-2 border border-orange-800">{book.copiesAvailable} Copies</span>
       </div>
 
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="bg-accent">Add to cart</Button>
+          <Button className="bg-accent w-full md:w-[20%]">Add to cart</Button>
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>

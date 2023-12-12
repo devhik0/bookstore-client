@@ -7,8 +7,8 @@ export default function Search({ where }: { where?: "home" | "books" }) {
   const [query, setQuery] = useState("");
 
   return (
-    <form className="p-4 flex gap-4 justify-between items-center ">
-      <div id={where} className="flex gap-4 w-full items-center">
+    <form className="p-4 flex justify-between items-center">
+      <div id={where} className="flex gap-2 w-full items-center">
         <input
           name="query"
           type="search"
@@ -20,7 +20,7 @@ export default function Search({ where }: { where?: "home" | "books" }) {
           className="p-2 w-full border border-orange-800"
         />
         <Link href={query ? `/books?searchString=${query}` : `/books`}>
-          <Button type="submit" className="bg-accent">
+          <Button type="submit" className="bg-accent text-xs md:text-[1rem]">
             Search
           </Button>
         </Link>

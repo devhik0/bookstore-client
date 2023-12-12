@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function CartSheet({ isLogged }: { isLogged: string }) {
   return (
     <Sheet>
-      <SheetTrigger className="pt-2">
-        <ShoppingCart color="white" className="m-4" />
+      <SheetTrigger>
+        <ShoppingCart color="white" className="m-4" size={"2rem"} />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

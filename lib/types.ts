@@ -33,6 +33,7 @@ export type Customer = {
   email: string; //email regex
   fullName: string;
   password: string;
+  role: "ROLE_USER" | "ROLE_STAFF";
 };
 
 export type Order = {

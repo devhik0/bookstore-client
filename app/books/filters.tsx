@@ -11,8 +11,8 @@ export default function Filters() {
   return (
     <div>
       <form className="flex gap-4 flex-col justify-center">
-        <div className="flex flex-col gap-2 justify-around  p-2">
-          <h3>Filter by Genre</h3>
+        <div className="flex flex-col gap-2 justify-around p-2">
+          <h3>Genre</h3>
           <label className={`flex gap-2 justify-between ${genre === "Fiction" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
               type="radio"
@@ -43,7 +43,7 @@ export default function Filters() {
         </div>
 
         <div className="flex flex-col gap-2 justify-around  p-2">
-          <h3>Filter by Language</h3>
+          <h3>Language</h3>
           <label className={`flex gap-2 justify-between ${lang === "ENGLISH" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
               type="radio"
@@ -64,12 +64,12 @@ export default function Filters() {
           </label>
         </div>
         <Link href={`/books?genre=${genre}&language=${lang}`}>
-          <Button type="submit" className="w-full bg-accent">
+          <Button type="submit" className="w-full bg-accent text-xs md:text-[1rem]">
             Filter
           </Button>
         </Link>
         <Link href={`/books`}>
-          <Button type="submit" variant={"destructive"} className="w-full">
+          <Button type="submit" variant={"destructive"} className="w-full text-xs md:text-[1rem]">
             Clear Filters
           </Button>
         </Link>
