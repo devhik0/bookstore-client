@@ -34,6 +34,7 @@ export default function AccountTabs({
   genres: { id: number; genre: string }[];
   customers: Customer[];
 }) {
+  // todo: Add edit book feature
   return (
     <Tabs defaultValue="books" className="w-full justify-center">
       <TabsList className="flex justify-center gap-2 mt-2 w-full bg-gray-100 p-4">
@@ -220,16 +221,14 @@ export default function AccountTabs({
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button className="text-xs bg-orange-600" size={"sm"}>
+                      {/* //todo: Add Edit book feature */}
                       <Pencil size={"1rem"} />
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                      <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account and remove your data
-                        from our servers.
-                      </DialogDescription>
+                      <DialogTitle>Edit book</DialogTitle>
+                      <DialogDescription>Edit book form</DialogDescription>
                     </DialogHeader>
                   </DialogContent>
                 </Dialog>

@@ -8,7 +8,7 @@
   - DELETE /books/:id [staff] +
   - PATCH /books/:id/cover [staff] +
 
-  - PUT /books/:id [staff] (patch ?) to add values
+  - PUT /books/:id [staff] <---------
 
   Genre
   -----------------------------
@@ -21,11 +21,6 @@
   - POST /customers (signup) [user] +
   - DELETE /customers/:id [staff] (NOT WORKING ?)
 
-  Author
-  -----------------------------
-  - GET /authors, /authors/:id [public *]
-  - PUT /authors/:id [staff]
-
   Order
   -----------------------------
   - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
@@ -35,7 +30,13 @@
 
   Recommendations
   -----------------------------
-  - GET /recommendations [user] <---
+  - GET /recommendations [user] + (empty ?)
+
+  //////
+  Author (NO NEED)
+  -----------------------------
+  - GET /authors, /authors/:id [public *]
+  - PUT /authors/:id [staff]
 
   Auth: JWT - Header Bearer (user, staff)
 
