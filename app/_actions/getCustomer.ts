@@ -19,7 +19,5 @@ export const getCustomer = async () => {
   }
   const customer = (await data.json()) as Customer;
 
-  console.log("Customer: ", customer);
-
   return customer;
 };

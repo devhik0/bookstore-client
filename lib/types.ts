@@ -4,7 +4,7 @@ export type Book = {
   description: string;
   discountPercent: number;
   imageLink: string;
-  language: "ROMANIAN" | "ENGLISH";
+  language: "ROMANIAN" | "ENGLISH" | "SPANISH";
   numPages: number;
   priceBeforeDiscount: number;
   publisher: string;

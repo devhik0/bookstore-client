@@ -1,8 +1,12 @@
 import { BASE_URL } from "@/lib/constants";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export const addBookImage = async (file: File, id: number) => {
   "use server";
+
+  const token = cookies().get("auth_token")?.value as string;
+
   if (!file) {
     throw Error("Please add a file");
   }
@@ -16,6 +20,9 @@ export const addBookImage = async (file: File, id: number) => {
     const res = await fetch(`${BASE_URL}/books/${id}/cover`, {
       method: "PATCH",
       body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     if (!res.ok) {
       console.log("Error while adding book image: ", res.status);

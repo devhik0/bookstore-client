@@ -26,7 +26,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
               {books.length === 0 ? (
                 <>There is no book here.</>
               ) : (
-                books.map((book) => {
+                books.reverse().map((book) => {
                   return (
                     <Link
                       href={`/books/${book.id}`}
