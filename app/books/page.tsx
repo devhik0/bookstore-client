@@ -2,19 +2,22 @@ import Search from "@/app/_components/search";
 import Filters from "@/app/books/filters";
 import Sorts from "@/app/books/sorts";
 import { CardTitle } from "@/components/ui/card";
-import { Books, SearchParams } from "@/lib/types";
+import { Books, Genre, SearchParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 import { getBooks } from "../_actions/getBooks";
+import { getGenres } from "../_actions/getGenres";
 
 export default async function Books({ searchParams }: { searchParams: SearchParams }) {
   const books = (await getBooks(searchParams)) as Books;
+
+  const genres = (await getGenres()) as Genre[];
 
   return (
     <div className="w-full h-[100vh] text-center">
       <div className="flex gap-4">
         <div className="w-[35vw] md:w-[25vw] h-full border text-xs md:text-[1rem] px-2 border-green-400">
-          <Filters />
+          <Filters genres={genres} />
         </div>
         <div className="w-[60vw] md:w-full border border-green-400">
           <div className="flex flex-col w-[97%] text-xs md:text-[1rem]">

@@ -9,6 +9,8 @@ import Link from "next/link";
 export default async function Book({ params }: { params: { id: number } }) {
   const book = await getBook(params);
 
+  // todo: ADD Recomm.
+
   const discountAmount = (book.priceBeforeDiscount * book.discountPercent) / 100;
   const discountedPrice = book.priceBeforeDiscount - discountAmount;
 

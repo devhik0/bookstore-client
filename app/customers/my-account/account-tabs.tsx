@@ -1,6 +1,8 @@
 "use client";
 
+import { addCover } from "@/app/_actions/addCover";
 import { deleteBook } from "@/app/_actions/deleteBook";
+import { deleteCustomer } from "@/app/_actions/deleteCustomer";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,38 +25,34 @@ export default function AccountTabs({
   books,
   uploadBook,
   genres,
+  customers,
 }: {
   customer: Customer;
   orders: Order[];
   books: Book[];
   uploadBook: (formData: FormData) => Promise<void>;
   genres: { id: number; genre: string }[];
+  customers: Customer[];
 }) {
-  // todo: HERE <----
-  const addImage = async () => {
-    return;
-  };
-
   return (
-    <Tabs defaultValue="orders" className="w-full justify-center">
-      <TabsList className="flex justify-center gap-2 mt-2 w-full bg-gray-100 p-2">
-        <TabsTrigger value="books" className="bg-gray-300 text-black p-2 rounded-lg">
-          Books
-        </TabsTrigger>
+    <Tabs defaultValue="books" className="w-full justify-center">
+      <TabsList className="flex justify-center gap-2 mt-2 w-full bg-gray-100 p-4">
         <TabsTrigger value="orders" className="bg-gray-300 text-black p-2 rounded-lg">
           Orders
+        </TabsTrigger>
+        <TabsTrigger value="books" className="bg-gray-300 text-black p-2 rounded-lg">
+          Books
         </TabsTrigger>
         <TabsTrigger value="customers" className="bg-gray-300 text-black p-2 rounded-lg">
           Customers
         </TabsTrigger>
       </TabsList>
       <TabsContent value="books">
-        <div className="flex justify-end mr-4 text-sm">
+        <div className="flex justify-end mr-2 text-sm">
           <Dialog>
             <DialogTrigger asChild>
               <Button className="bg-blue-600">
-                <Plus size={"1rem"} className="mr-2" />
-                Add Book
+                <Plus size={"1rem"} className="" />
               </Button>
             </DialogTrigger>
             <DialogContent className="bg-gray-100 h-[93vh]">
@@ -207,80 +205,82 @@ export default function AccountTabs({
             </DialogContent>
           </Dialog>
         </div>
-        {books.map((book) => (
-          <div
-            key={book.id}
-            className="flex flex-row gap-4 justify-between items-center border border-gray-200 rounded-lg p-2 m-2"
-          >
-            <Image src={book.imageLink} width={60} height={60} alt="book-img" />
-            <div className="flex justify-between items-center w-full">
-              <p>{book.title}</p>
-              <p>€{book.priceBeforeDiscount}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="text-xs bg-accent">
-                    <Pencil size={"1rem"} className="mr-2" />
-                    Edit
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                    <DialogDescription>
-                      This action cannot be undone. This will permanently delete your account and remove your data from
-                      our servers.
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <form action={addImage}>
-                    <Button className="text-xs bg-accent">
-                      <Upload size={"1rem"} className="mr-2" />
-                      Add Image
+        {books
+          .map((book) => (
+            <div
+              key={book.id}
+              className="flex flex-row gap-4 justify-between items-center border border-gray-200 rounded-lg pr-2 m-2"
+            >
+              <Image src={book.imageLink} width={40} height={40} alt="book-img" />
+              <div className="flex justify-between items-center w-full">
+                <p>{book.title}</p>
+                <p>€{book.priceBeforeDiscount}</p>
+              </div>
+              <div className="flex flex-row gap-2 items-center">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="text-xs bg-orange-600" size={"sm"}>
+                      <Pencil size={"1rem"} />
                     </Button>
-                  </form>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                    <DialogDescription>
-                      This action cannot be undone. This will permanently delete your account and remove your data from
-                      our servers.
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="text-xs" variant={"destructive"}>
-                  <Trash2 size={"1rem"} className="mr-2" />
-                  Delete
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                  <DialogDescription>
-                    This action cannot be undone. This will permanently delete this book and remove it from our servers.
-                  </DialogDescription>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button variant={"secondary"}>Cancel</Button>
-                    </DialogClose>
-                    <form action={deleteBook.bind(null, book.id)}>
-                      <Button variant={"destructive"}>Delete</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. This will permanently delete your account and remove your data
+                        from our servers.
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="text-xs bg-blue-600" size={"sm"}>
+                      <Upload size={"1rem"} />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Add Cover</DialogTitle>
+                      <DialogDescription>Please upload a image to set book cover</DialogDescription>
+                    </DialogHeader>
+                    <form action={addCover} className="border border-gray-400 p-4 flex justify-between items-center">
+                      <input type="hidden" name="id" value={book.id} />
+                      <input type="file" name="file" />
+                      <Button type="submit" className="bg-blue-600">
+                        Add Cover
+                      </Button>
                     </form>
-                  </DialogFooter>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
-          </div>
-        ))}
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="text-xs" variant={"destructive"} size={"sm"}>
+                      <Trash2 size={"1rem"} />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. This will permanently delete this book and remove it from our
+                        servers.
+                      </DialogDescription>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant={"secondary"}>Cancel</Button>
+                        </DialogClose>
+                        <form action={deleteBook.bind(null, book.id)}>
+                          <Button variant={"destructive"}>Delete</Button>
+                        </form>
+                      </DialogFooter>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+          ))
+          .reverse()}
       </TabsContent>
       <TabsContent value="orders">
         {customer.role === "ROLE_STAFF" && (
@@ -315,7 +315,46 @@ export default function AccountTabs({
           </div>
         )}
       </TabsContent>
-      <TabsContent value="customers">Customers</TabsContent>
+      <TabsContent value="customers">
+        {customers.map((customer) => (
+          <div
+            key={customer.id}
+            className="border border-gray-400 rounded-lg p-4 m-2 flex flex-row gap-2 justify-between items-center"
+          >
+            <div className="flex flex-row gap-2 w-full">
+              <p>{customer.fullName}</p>
+              <p>{customer.email}</p>
+              <p>{customer.password || "******"}</p>
+              <p className="mb-2">{customer.address}</p>
+              {customer.role === "ROLE_STAFF" ? <span className="bg-blue-200 p-2">Staff</span> : <p>User</p>}
+            </div>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="text-xs" variant={"destructive"} size={"sm"}>
+                  <Trash2 size={"1rem"} />
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. This will permanently delete this user and remove it from our servers.
+                  </DialogDescription>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button variant={"secondary"}>Cancel</Button>
+                    </DialogClose>
+                    <form action={deleteCustomer.bind(null, customer.id)}>
+                      <Button variant={"destructive"}>Delete</Button>
+                    </form>
+                  </DialogFooter>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+          </div>
+        ))}
+      </TabsContent>
     </Tabs>
   );
 }

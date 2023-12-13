@@ -6,20 +6,20 @@
   - GET /books, /books/:id [public *] +
   - POST /books [staff] +             
   - DELETE /books/:id [staff] +
+  - PATCH /books/:id/cover [staff] +
 
-  - PUT /books/:id [staff]
-  - PATCH /books/:id/cover [staff] <-----
+  - PUT /books/:id [staff] (patch ?) to add values
 
   Genre
   -----------------------------
-  - GET /genre-tags, /genre-tags/:id [public *]
-  - PUT /genre-tags/:id (no need) X [staff]
+  - GET /genre-tags, /genre-tags/:id [public *] +
+  - PUT /genre-tags/:id (no need ?) X [staff] +
 
   Customer
   -----------------------------
-  - GET /customers, /customers/:id, /customers/my-account [user, staff] 
+  - GET /customers, + /customers/:id, + /customers/my-account [user, staff]
   - POST /customers (signup) [user] +
-  - DELETE /customers/:id [staff]
+  - DELETE /customers/:id [staff] (NOT WORKING ?)
 
   Author
   -----------------------------
@@ -28,14 +28,14 @@
 
   Order
   -----------------------------
-  - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff]
-  - POST /orders [user]
+  - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
+  - POST /orders [user] 
   - DELETE /orders/:id [staff]
   - PATCH /orders/:oid [staff]
 
   Recommendations
   -----------------------------
-  - GET /recommendations [user]
+  - GET /recommendations [user] <---
 
   Auth: JWT - Header Bearer (user, staff)
 

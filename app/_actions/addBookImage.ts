@@ -33,4 +33,5 @@ export const addBookImage = async (file: File, id: number) => {
     console.log("Error at cover: ", error);
   }
   revalidatePath("/books");
+  revalidatePath("/customers/my-account");
 };

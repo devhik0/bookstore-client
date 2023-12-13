@@ -1,10 +1,11 @@
 "use client";
 
+import { Genre } from "@/lib/types";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 
-export default function Filters() {
+export default function Filters({ genres }: { genres: Genre[] }) {
   const [lang, setLang] = useState("");
   const [genre, setGenre] = useState("");
 
@@ -13,33 +14,21 @@ export default function Filters() {
       <form className="flex gap-4 flex-col justify-center">
         <div className="flex flex-col gap-2 justify-around p-2">
           <h3>Genre</h3>
-          <label className={`flex gap-2 justify-between ${genre === "Fiction" ? "bg-accent p-2 text-gray-100" : ""}`}>
-            <input
-              type="radio"
-              checked={genre === "Fiction"}
-              onChange={(e) => setGenre(e.target.value)}
-              value={"Fiction"}
-            />
-            Fiction
-          </label>
-          <label className={`flex gap-2 justify-between ${genre === "Drama" && "bg-accent p-2 text-gray-100"}`}>
-            <input
-              type="radio"
-              checked={genre === "Drama"}
-              onChange={(e) => setGenre(e.target.value)}
-              value={"Drama"}
-            />
-            Drama
-          </label>
-          <label className={`flex gap-2 justify-between ${genre === "Adventure" && "bg-accent p-2 text-gray-100"}`}>
-            <input
-              type="radio"
-              checked={genre === "Adventure"}
-              onChange={(e) => setGenre(e.target.value)}
-              value={"Adventure"}
-            />
-            Adventure
-          </label>
+          {/* //todo: genres.map */}
+          {genres.map((g) => (
+            <label
+              key={g.id}
+              className={`flex gap-2 justify-between ${g.genre === genre ? "bg-accent p-1 text-gray-100" : ""}`}
+            >
+              <input
+                type="radio"
+                checked={g.genre === genre}
+                onChange={(e) => setGenre(e.target.value)}
+                value={g.genre}
+              />
+              {g.genre}
+            </label>
+          ))}
         </div>
 
         <div className="flex flex-col gap-2 justify-around  p-2">
@@ -51,7 +40,7 @@ export default function Filters() {
               onChange={(e) => setLang(e.target.value)}
               value={"ENGLISH"}
             />
-            ENGLISH{" "}
+            English{" "}
           </label>
           <label className={`flex gap-2 justify-between ${lang === "ROMANIAN" ? "bg-accent p-2 text-gray-100" : ""}`}>
             <input
@@ -60,7 +49,16 @@ export default function Filters() {
               onChange={(e) => setLang(e.target.value)}
               value={"ROMANIAN"}
             />
-            ROMANIAN{" "}
+            Romanian{" "}
+          </label>
+          <label className={`flex gap-2 justify-between ${lang === "SPANISH" ? "bg-accent p-2 text-gray-100" : ""}`}>
+            <input
+              type="radio"
+              checked={lang === "SPANISH"}
+              onChange={(e) => setLang(e.target.value)}
+              value={"SPANISH"}
+            />
+            Spanish{" "}
           </label>
         </div>
         <Link href={`/books?genre=${genre}&language=${lang}`}>

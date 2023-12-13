@@ -43,21 +43,17 @@ export default async function Cart() {
     <div>
       <h3>Your Order for CustomerID: 202</h3>
       <div className="flex flex-col gap-2 items-center justify-center">
-        {userId ? (
-          <div className="border border-gray-400 w-[80%] mx-auto my-4 p-2">
-            <div key={orders[0].id} className="border border-gray-400 m-4 p-2 flex gap-4 items-center justify-between">
-              <div className="flex gap-2">
-                {orders[0].orderItems.map((item) => (
-                  <div key={item.id} className="flex flex-row gap-2 bg-green-200 border border-green-200 m-2 p-2">
-                    <span>{item.bookId} </span>x<span>{item.quantity}</span>
-                  </div>
-                ))}
-              </div>
+        <div className="border border-gray-400 w-[80%] mx-auto my-4 p-2">
+          <div key={orders[0].id} className="border border-gray-400 m-4 p-2 flex gap-4 items-center justify-between">
+            <div className="flex gap-2">
+              {orders[0].orderItems.map((item) => (
+                <div key={item.id} className="flex flex-row gap-2 bg-green-200 border border-green-200 m-2 p-2">
+                  <span>{item.bookId} </span>x<span>{item.quantity}</span>
+                </div>
+              ))}
             </div>
           </div>
-        ) : (
-          <>You need to login to see your orders</>
-        )}
+        </div>
         <div className="flex gap-2">
           <form action={sendOrder}>
             <Button className="bg-gray-400" type="submit">

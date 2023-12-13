@@ -1,37 +1,74 @@
 import { getBooks } from "@/app/_actions/getBooks";
 import { getCustomer } from "@/app/_actions/getCustomer";
+import { getCustomers } from "@/app/_actions/getCustomers";
 import { getGenres } from "@/app/_actions/getGenres";
+import { getOrders } from "@/app/_actions/getOrders";
+import { getOrdersByCustomer } from "@/app/_actions/getOrdersByCustomer";
 import { uploadBook } from "@/app/_actions/uploadBook";
 import { Button } from "@/components/ui/button";
-import { BASE_URL } from "@/lib/constants";
-import { Order, SearchParams } from "@/lib/types";
-import { cookies } from "next/headers";
+import { Genre, Order, SearchParams } from "@/lib/types";
 import Link from "next/link";
 import AccountTabs from "./account-tabs";
 
 export default async function CustomerDashboard({ searchParams }: { searchParams: SearchParams }) {
   const customer = await getCustomer();
 
-  const getOrders = async () => {
-    const token = cookies().get("auth_token")?.value as string;
-    const data = await fetch(`${BASE_URL}/orders`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const res = (await data.json()) as Order[];
-    return res;
-  };
-
   const orders = await getOrders();
 
   const books = await getBooks(searchParams);
 
-  const genres = await getGenres();
+  const genres = (await getGenres()) as Genre[];
+
+  const customers = await getCustomers();
+
+  const ordersByCustomer = (await getOrdersByCustomer(customer.id)) as Order[];
+
+  console.log("Orders by customer: ", ordersByCustomer);
 
   return (
     <div className="flex flex-row gap-4">
-      <AccountTabs customer={customer} orders={orders} books={books} uploadBook={uploadBook} genres={genres} />
+      {customer.role === "ROLE_STAFF" && (
+        <AccountTabs
+          customer={customer}
+          orders={orders}
+          books={books}
+          uploadBook={uploadBook}
+          genres={genres}
+          customers={customers}
+        />
+      )}
+      {customer.role !== "ROLE_STAFF" && (
+        <div className="w-full">
+          <h3 className="font-bold text-xl ml-2">Order history</h3>
+          <div className="w-full">
+            {ordersByCustomer.map((order) => (
+              <div key={order.id} className="flex gap-2 flex-col border border-gray-400 m-2 p-2 justify-between">
+                <div className="flex gap-2 justify-between border-b border-b-gray-800">
+                  <div>{order.id}</div>
+                  <div>{order.customerId}</div>
+                  <div>
+                    <span>{order.createdAt.toString().slice(0, 9)}</span>{" "}
+                    <span>{order.createdAt.toString().slice(11, 19)}</span>
+                  </div>
+                  <div>{order.orderStatus}</div>
+                </div>
+                <h3>Order Items</h3>
+                {order.orderItems.map((item) => (
+                  <div key={item.id}>
+                    <span>
+                      {item.bookId} x {item.quantity}
+                    </span>
+                  </div>
+                ))}
+                <div className="flex gap-4 justify-center">
+                  <Button variant={"destructive"}>Reject</Button>
+                  <Button variant={"secondary"}>Approve</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className=" m-2 p-4 bg-blue-50 h-[30%]">
         <div className="flex justify-end">
           {customer.role === "ROLE_STAFF" ? (
