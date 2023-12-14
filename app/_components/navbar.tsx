@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogIn as LoginIcon, UserPlus } from "lucide-react";
+import { LogInIcon, UserPlus } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link href="/login" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Login
-                  <LoginIcon className="ml-2" />
+                  <LogInIcon className="ml-2" />
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

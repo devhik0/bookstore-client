@@ -23,13 +23,13 @@ export const loginUser = async (formData: FormData) => {
     }
 
     const res = await data.json();
-    cookies().set("auth_token", res.token);
+    cookies().set("auth_token", res.token, { sameSite: "strict", secure: true, httpOnly: true });
   } catch (error) {
     console.log(error);
   }
 
   if (cookies().get("auth_token")) {
-    redirect("/");
+    redirect("/books");
   } else {
     console.log("Cookie eaten :D");
   }
