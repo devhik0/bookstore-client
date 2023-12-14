@@ -4,6 +4,7 @@
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
     "prettier"
   ],
   "rules": {
@@ -11,5 +12,5 @@
     "@typescript-eslint/no-explicit-any": "error"
   },
   "root": true,
-  "ignorePatterns": ["**/*.config"]
+  "ignorePatterns": ["**/*.config", "components/ui/**"]
 }

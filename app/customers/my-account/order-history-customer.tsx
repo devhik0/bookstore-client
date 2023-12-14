@@ -11,11 +11,11 @@ export default async function OrderHistoryCustomer() {
 
   return (
     <div className="w-full">
-      <h3 className="font-bold text-xl ml-2">Order history</h3>
+      <h3 className="ml-2 text-xl font-bold">Order history</h3>
       <div className="w-full">
         {ordersByCustomer.map((order) => (
-          <div key={order.id} className="flex gap-2 flex-col border border-gray-400 m-2 p-2 justify-between">
-            <div className="flex gap-2 justify-between border-b border-b-gray-800">
+          <div key={order.id} className="m-2 flex flex-col justify-between gap-2 border border-gray-400 p-2">
+            <div className="flex justify-between gap-2 border-b border-b-gray-800">
               <div>{order.id}</div>
               <div>{order.customerId}</div>
               <div>
@@ -32,7 +32,7 @@ export default async function OrderHistoryCustomer() {
                 </span>
               </div>
             ))}
-            <div className="flex gap-4 justify-center">
+            <div className="flex justify-center gap-4">
               <Button variant={"destructive"}>Reject</Button>
               <Button variant={"secondary"}>Approve</Button>
             </div>

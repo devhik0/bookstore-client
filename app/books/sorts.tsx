@@ -6,7 +6,7 @@ export default function Sorts() {
   const [selected, setSelected] = useState("alphabetical");
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <span>Sort by</span>
       <select className="p-2" value={selected} onChange={(e) => setSelected(e.target.value)}>
         <option value={"alphabetical"}>Alphabetical</option>

@@ -14,10 +14,10 @@ export default async function BookList() {
         .map((book) => (
           <div
             key={book.id}
-            className="flex flex-row gap-4 justify-between items-center border border-gray-200 rounded-lg pr-2 m-2"
+            className="m-2 flex flex-row items-center justify-between gap-4 rounded-lg border border-gray-200 pr-2"
           >
             <Image src={book.imageLink} width={40} height={40} alt="book-img" />
-            <div className="flex justify-between items-center w-full">
+            <div className="flex w-full items-center justify-between">
               <p>{book.title}</p>
               <p>€{book.priceBeforeDiscount}</p>
             </div>

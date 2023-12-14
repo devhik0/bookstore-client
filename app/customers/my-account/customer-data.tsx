@@ -7,16 +7,16 @@ export default async function CustomerData() {
   const customer = (await getCustomer()) as Customer;
 
   return (
-    <div className=" m-2 p-4 bg-blue-50 h-[30%]">
+    <div className=" m-2 h-[30%] bg-blue-50 p-4">
       <div className="flex justify-end">
         {customer.role === "ROLE_STAFF" ? (
-          <span className="bg-blue-200 text-xs px-4 py-1 rounded-lg">Staff</span>
+          <span className="rounded-lg bg-blue-200 px-4 py-1 text-xs">Staff</span>
         ) : (
           <></>
         )}
       </div>
       <p className="mt-2">Email: {customer.email}</p>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <p>Password: {customer.password}</p> <input type="password" className="w-[20%]" defaultValue={"******"} />
         <Button variant={"destructive"} size={"sm"}>
           Change

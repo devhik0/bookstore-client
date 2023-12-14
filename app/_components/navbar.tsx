@@ -34,9 +34,9 @@ export default function Navbar() {
       <Link href={"/"}>
         <Image src={"/logo.png"} width={64} height={64} alt="logo" />
       </Link>
-      <NavigationMenuList className={`flex flex-row items-center m-2`}>
+      <NavigationMenuList className={`m-2 flex flex-row items-center`}>
         {!isLogged && (
-          <div className="flex flex-col gap-4 items-center p-2 md:flex-row ">
+          <div className="flex flex-col items-center gap-4 p-2 md:flex-row ">
             <NavigationMenuItem>
               <Link href="/login" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -58,7 +58,7 @@ export default function Navbar() {
 
         {isLogged && (
           <div
-            className={`flex items-center ${!isLogged ? `flex-col mr-4 pt-2` : `flex-row justify-center px-2`}
+            className={`flex items-center ${!isLogged ? `mr-4 flex-col pt-2` : `flex-row justify-center px-2`}
             `}
           >
             <NavigationMenuItem>

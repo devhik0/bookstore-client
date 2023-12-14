@@ -10,17 +10,17 @@ export default async function EditBookDialog({ book }: { book: Book }) {
   const genres = (await getGenres()) as Genre[];
 
   return (
-    <div className="flex flex-row gap-2 items-center">
+    <div className="flex flex-row items-center gap-2">
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="text-xs bg-orange-600" size={"sm"}>
+          <Button className="bg-orange-600 text-xs" size={"sm"}>
             {/* //todo: Add Edit book feature */}
             <Pencil size={"1rem"} />
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-orange-300 h-[93vh] ">
+        <DialogContent className="h-[93vh] bg-orange-300 ">
           <h3>Edit book</h3>
-          <form action={editBook} className="grid gap-1 m-1 p-1 text-sm">
+          <form action={editBook} className="m-1 grid gap-1 p-1 text-sm">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="title" className="text-right">
                 Title:

@@ -10,11 +10,11 @@ export default async function TabOrders() {
   return (
     <>
       {customer.role === "ROLE_STAFF" && (
-        <div className="border border-gray-400 w-[80%] mx-auto my-4 p-2">
+        <div className="mx-auto my-4 w-[80%] border border-gray-400 p-2">
           <div className="w-full">
             {orders.map((order) => (
-              <div key={order.id} className="flex gap-2 flex-col border border-gray-400 m-2 p-2 justify-between">
-                <div className="flex gap-2 justify-between border-b border-b-gray-800">
+              <div key={order.id} className="m-2 flex flex-col justify-between gap-2 border border-gray-400 p-2">
+                <div className="flex justify-between gap-2 border-b border-b-gray-800">
                   <div>{order.id}</div>
                   <div>{order.customerId}</div>
                   <div>
@@ -31,7 +31,7 @@ export default async function TabOrders() {
                     </span>
                   </div>
                 ))}
-                <div className="flex gap-4 justify-center">
+                <div className="flex justify-center gap-4">
                   <Button variant={"destructive"}>Reject</Button>
                   <Button variant={"secondary"}>Approve</Button>
                 </div>

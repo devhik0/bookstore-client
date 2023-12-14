@@ -42,12 +42,12 @@ export default async function Cart() {
   return (
     <div>
       <h3>Your Order for CustomerID: 202</h3>
-      <div className="flex flex-col gap-2 items-center justify-center">
-        <div className="border border-gray-400 w-[80%] mx-auto my-4 p-2">
-          <div key={orders[0].id} className="border border-gray-400 m-4 p-2 flex gap-4 items-center justify-between">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <div className="mx-auto my-4 w-[80%] border border-gray-400 p-2">
+          <div key={orders[0].id} className="m-4 flex items-center justify-between gap-4 border border-gray-400 p-2">
             <div className="flex gap-2">
               {orders[0].orderItems.map((item) => (
-                <div key={item.id} className="flex flex-row gap-2 bg-green-200 border border-green-200 m-2 p-2">
+                <div key={item.id} className="m-2 flex flex-row gap-2 border border-green-200 bg-green-200 p-2">
                   <span>{item.bookId} </span>x<span>{item.quantity}</span>
                 </div>
               ))}

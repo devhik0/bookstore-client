@@ -15,8 +15,8 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
           {isLogged ? (
             <div className="h-[80vh]">
               <div className="h-full overflow-y-scroll">
-                <div className=" flex gap-4 items-center justify-between">
-                  <div className="flex flex-col w-full">
+                <div className=" flex items-center justify-between gap-4">
+                  <div className="flex w-full flex-col">
                     {[
                       { name: "Horizon Zero Dawn", qty: 5 },
                       { name: "Hunger Games", qty: 1 },
@@ -32,7 +32,7 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
                     ].map((item, ix) => (
                       <div
                         key={ix}
-                        className="border-b border-b-gray-200 w-full flex flex-row gap-2 my-1 items-center p-2 justify-between hover:bg-orange-200"
+                        className="my-1 flex w-full flex-row items-center justify-between gap-2 border-b border-b-gray-200 p-2 hover:bg-orange-200"
                       >
                         <span className="m-2">
                           {item.name} x {item.qty}
@@ -49,7 +49,7 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
           )}
         </SheetHeader>
         <Link href={`/cart`}>
-          <Button className="w-[90%] absolute bottom-2 right-4 bg-accent">Order Now</Button>
+          <Button className="bg-accent absolute bottom-2 right-4 w-[90%]">Order Now</Button>
         </Link>
       </SheetContent>
     </Sheet>

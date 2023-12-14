@@ -14,13 +14,13 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
   const genres = (await getGenres()) as Genre[];
 
   return (
-    <div className="w-full h-[100vh] text-center">
+    <div className="h-[100vh] w-full text-center">
       <div className="flex gap-4">
-        <div className="w-[35vw] md:w-[25vw] h-full border text-xs md:text-[1rem] px-2 border-green-400">
+        <div className="h-full w-[35vw] border border-green-400 px-2 text-xs md:w-[25vw] md:text-[1rem]">
           <Filters genres={genres} />
         </div>
-        <div className="w-[60vw] md:w-full border border-green-400">
-          <div className="flex flex-col w-[97%] text-xs md:text-[1rem]">
+        <div className="w-[60vw] border border-green-400 md:w-full">
+          <div className="flex w-[97%] flex-col text-xs md:text-[1rem]">
             <div className="flex flex-col items-center justify-end md:flex-row">
               <Search where="books" />
               <Sorts />
@@ -34,7 +34,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                     <Link
                       href={`/books/${book.id}`}
                       key={book.id}
-                      className="flex flex-col border border-gray-400 rounded-lg w-[40vw] md:w-[15vw] mt-2"
+                      className="mt-2 flex w-[40vw] flex-col rounded-lg border border-gray-400 md:w-[15vw]"
                     >
                       <Image src={book.imageLink} width={210} height={210} alt="book-img" />
                       <div className="p-4">

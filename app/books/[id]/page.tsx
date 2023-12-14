@@ -21,8 +21,8 @@ export default async function Book({ params }: { params: { id: number } }) {
   return (
     <div className="flex flex-row gap-4">
       <div>
-        <Image src={book.imageLink} alt="book-img" width={1000} height={100} className="w-[20%] h-[30%]" />
-        <h3 className="text-lg mt-2">{book.title}</h3>
+        <Image src={book.imageLink} alt="book-img" width={1000} height={100} className="h-[30%] w-[20%]" />
+        <h3 className="mt-2 text-lg">{book.title}</h3>
         <div className="py-2">
           {book.authorNameList.map((author, idx) => (
             <span className="" key={idx}>
@@ -32,19 +32,19 @@ export default async function Book({ params }: { params: { id: number } }) {
         </div>
         <div className="pt-2">
           {book.genreTagList.map((genre, idx) => (
-            <span className="bg-gray-100 rounded-lg p-2 mr-1" key={idx}>
+            <span className="mr-1 rounded-lg bg-gray-100 p-2" key={idx}>
               {genre}
             </span>
           ))}
         </div>
-        <div className="flex flex-col w-full md:w-[10%] mt-4">
+        <div className="mt-4 flex w-full flex-col md:w-[10%]">
           <p className="">{book.publisher}</p>
           <p className="">{book.yearPublished}</p> <br />
           <p className="">{book.language}</p> <br />
           <p className="">{book.numPages} Pages</p> <br />
         </div>
         <p className="mt-2 ">{book.description}</p>
-        <div className="flex flex-row gap-2 items-center my-4">
+        <div className="my-4 flex flex-row items-center gap-2">
           <span className="line-through">€ {book.priceBeforeDiscount}</span>
           <span className="text-red-500"> -%{book.discountPercent}</span> <br />
           <span className="">€ {discountedPrice}</span>
@@ -61,8 +61,8 @@ export default async function Book({ params }: { params: { id: number } }) {
                 <SheetDescription>
                   <div className="h-[80vh]">
                     <div className="h-full overflow-y-scroll">
-                      <div className=" flex gap-4 items-center justify-between">
-                        <div className="flex flex-col w-full">
+                      <div className=" flex items-center justify-between gap-4">
+                        <div className="flex w-full flex-col">
                           {[
                             { name: "Horizon Zero Dawn", qty: 5 },
                             { name: "Hunger Games", qty: 1 },
@@ -78,7 +78,7 @@ export default async function Book({ params }: { params: { id: number } }) {
                           ].map((item, ix) => (
                             <div
                               key={ix}
-                              className="border-b border-b-gray-200 w-full flex flex-row gap-2 my-1 items-center p-2 justify-between hover:bg-orange-200"
+                              className="my-1 flex w-full flex-row items-center justify-between gap-2 border-b border-b-gray-200 p-2 hover:bg-orange-200"
                             >
                               <span className="m-2">
                                 {item.name} x {item.qty}
@@ -96,7 +96,7 @@ export default async function Book({ params }: { params: { id: number } }) {
               )}
             </SheetHeader>
             <Link href={`/cart`}>
-              <Button className="w-[90%] absolute bottom-2 right-4 bg-accent">Order Now</Button>
+              <Button className="bg-accent absolute bottom-2 right-4 w-[90%]">Order Now</Button>
             </Link>
           </SheetContent>
         </Sheet>
@@ -111,14 +111,14 @@ export default async function Book({ params }: { params: { id: number } }) {
               .map((book) => (
                 <div
                   key={book.id}
-                  className="flex flex-row gap-4 justify-between items-center border border-gray-200 rounded-lg pr-2 m-2"
+                  className="m-2 flex flex-row items-center justify-between gap-4 rounded-lg border border-gray-200 pr-2"
                 >
                   <Image src={book.imageLink} width={40} height={40} alt="book-img" />
-                  <div className="flex justify-between items-center w-full">
+                  <div className="flex w-full items-center justify-between">
                     <p>{book.title}</p>
                     <p>€{book.priceBeforeDiscount}</p>
                   </div>
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex flex-row items-center gap-2">
                     {/* <Dialog>
                       <DialogTrigger asChild>
                         <Button className="text-xs bg-orange-600" size={"sm"}>

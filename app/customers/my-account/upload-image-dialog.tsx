@@ -15,7 +15,7 @@ export default async function UploadImageDialog({ book }: { book: Book }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-xs bg-green-600" size={"sm"}>
+        <Button className="bg-green-600 text-xs" size={"sm"}>
           <Upload size={"1rem"} />
         </Button>
       </DialogTrigger>
@@ -24,7 +24,7 @@ export default async function UploadImageDialog({ book }: { book: Book }) {
           <DialogTitle>Add Cover</DialogTitle>
           <DialogDescription>Please upload a image to set book cover</DialogDescription>
         </DialogHeader>
-        <form action={addCover} className="border border-green-400 p-4 flex justify-between items-center">
+        <form action={addCover} className="flex items-center justify-between border border-green-400 p-4">
           <input type="hidden" name="id" value={book.id} />
           <input type="file" name="file" />
           <Button type="submit" className="bg-green-600">

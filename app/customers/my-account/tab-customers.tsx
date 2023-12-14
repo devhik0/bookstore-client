@@ -10,9 +10,9 @@ export default async function TabCustomers() {
       {customers.map((customer) => (
         <div
           key={customer.id}
-          className="border border-gray-400 rounded-lg p-4 m-2 flex flex-row gap-2 justify-between items-center"
+          className="m-2 flex flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-4"
         >
-          <div className="flex flex-row gap-2 w-full">
+          <div className="flex w-full flex-row gap-2">
             <p>{customer.fullName}</p>
             <p>{customer.email}</p>
             <p>{customer.password || "******"}</p>

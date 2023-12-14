@@ -6,16 +6,16 @@ import { Plus } from "lucide-react";
 
 export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
   return (
-    <div className="flex justify-end mr-2 text-sm">
+    <div className="mr-2 flex justify-end text-sm">
       <Dialog>
         <DialogTrigger asChild>
           <Button className="bg-blue-600" size={"sm"}>
             <Plus size={"1rem"} className="" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-blue-300 h-[93vh]">
-          <h3 className="p-0 m-0">Add Book</h3>
-          <form action={uploadBook} className="grid gap-2 m-0 p-1 text-sm">
+        <DialogContent className="h-[93vh] bg-blue-300">
+          <h3 className="m-0 p-0">Add Book</h3>
+          <form action={uploadBook} className="m-0 grid gap-2 p-1 text-sm">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="title" className="text-right">
                 Title:
