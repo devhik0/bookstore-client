@@ -14,7 +14,7 @@ export type Book = {
 
 export type Books = (Book & { authorNameList: string[]; genreTagList: string[] })[];
 
-export type SearchParams = { searchString: string; genre: string; language: string };
+export type SearchParams = { searchString?: string; genre?: string; language?: string };
 
 export type Author = {
   id: number;

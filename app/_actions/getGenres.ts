@@ -1,3 +1,5 @@
+"use server";
+
 import { BASE_URL } from "@/lib/constants";
 
 export const getGenres = async () => {

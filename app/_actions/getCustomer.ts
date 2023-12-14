@@ -1,3 +1,5 @@
+"use server";
+
 import { BASE_URL } from "@/lib/constants";
 import { Customer } from "@/lib/types";
 import { cookies } from "next/headers";

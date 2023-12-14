@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { addBookImage } from "./addBookImage";
 
-export const uploadBook = async (formData: FormData) => {
+export const editBook = async (formData: FormData) => {
   const token = cookies().get("auth_token")?.value as string;
 
   // form fields
@@ -39,12 +39,12 @@ export const uploadBook = async (formData: FormData) => {
 
   try {
     const data = await fetch(`${BASE_URL}/books`, {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: bookData,
     });
     if (!data.ok) {
-      console.log("Error while adding book data", data.status);
+      console.log("Error while editing book: ", data.status);
     } else {
       const book = await data.json();
       const id = book?.id;
@@ -54,11 +54,11 @@ export const uploadBook = async (formData: FormData) => {
         // console.log("Added book with image: ", file.name);
         await addBookImage(file, id);
       } else {
-        console.log("Added book without image but id: ", id);
+        console.log("Edited book without image but id: ", id);
       }
     }
   } catch (error) {
-    console.log("Error at add: ", error);
+    console.log("Error at edit: ", error);
   }
   revalidatePath("/books");
   revalidatePath("/customers/my-account");

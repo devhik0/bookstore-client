@@ -1,20 +1,22 @@
+"use server";
+
 import { BASE_URL } from "@/lib/constants";
 import { Books, SearchParams } from "@/lib/types";
 
-export const getBooks = async (params: SearchParams) => {
-  if (params.searchString) {
-    const data = await fetch(`${BASE_URL}/books?searchString=${params.searchString}`);
+export const getBooks = async ({ searchString, genre, language }: SearchParams) => {
+  if (searchString) {
+    const data = await fetch(`${BASE_URL}/books?searchString=${searchString}`);
     return (await data.json()) as Books;
   } else {
-    if (params.genre && params.language) {
-      const data = await fetch(`${BASE_URL}/books?genre=${params.genre}&language=${params.language}`);
+    if (genre && language) {
+      const data = await fetch(`${BASE_URL}/books?genre=${genre}&language=${language}`);
       return (await data.json()) as Books;
     }
-    if (params.genre && !params.language) {
-      const data = await fetch(`${BASE_URL}/books?genre=${params.genre}`);
+    if (genre && !language) {
+      const data = await fetch(`${BASE_URL}/books?genre=${genre}`);
       return (await data.json()) as Books;
-    } else if (!params.genre && params.language) {
-      const data = await fetch(`${BASE_URL}/books?language=${params.language}`);
+    } else if (!genre && language) {
+      const data = await fetch(`${BASE_URL}/books?language=${language}`);
       return (await data.json()) as Books;
     } else {
       const data = await fetch(`${BASE_URL}/books`);
