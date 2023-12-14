@@ -1,12 +1,11 @@
-"use client";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Genre } from "@/lib/types";
 import AddBookDialog from "./add-book-dialog";
 import BookList from "./book-list";
 import TabCustomers from "./tab-customers";
 import TabOrders from "./tab-orders";
 
-export default function AccountTabs() {
+export default function AccountTabs({ genres }: { genres: Genre[] }) {
   return (
     <Tabs defaultValue="books" className="w-full justify-center">
       <TabsList className="flex justify-center gap-2 mt-2 w-full bg-gray-100 p-4">
@@ -21,7 +20,7 @@ export default function AccountTabs() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="books">
-        <AddBookDialog />
+        <AddBookDialog genres={genres} />
         <BookList />
       </TabsContent>
       <TabsContent value="orders">

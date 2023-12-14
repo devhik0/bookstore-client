@@ -1,13 +1,10 @@
-import { getGenres } from "@/app/_actions/getGenres";
 import { uploadBook } from "@/app/_actions/uploadBook";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { Genre } from "@/lib/types";
 import { Plus } from "lucide-react";
 
-export default async function AddBookDialog() {
-  const genres = (await getGenres()) as Genre[];
-
+export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
   return (
     <div className="flex justify-end mr-2 text-sm">
       <Dialog>

@@ -18,14 +18,21 @@ export default async function EditBookDialog({ book }: { book: Book }) {
             <Pencil size={"1rem"} />
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-orange-300 h-[93vh]">
+        <DialogContent className="bg-orange-300 h-[93vh] ">
           <h3>Edit book</h3>
-          <form action={editBook} className="grid gap-2 m-6 p-1 text-sm">
+          <form action={editBook} className="grid gap-1 m-1 p-1 text-sm">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="title" className="text-right">
                 Title:
               </label>
-              <input name="title" className="col-span-3 rounded-sm p-1" placeholder="Title" required />
+              <input
+                name="title"
+                className="col-span-3 rounded-sm p-1"
+                placeholder="Title"
+                required
+                // value={title}
+                // onChange={(e) => setTitle(e.target.value as string)}
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">

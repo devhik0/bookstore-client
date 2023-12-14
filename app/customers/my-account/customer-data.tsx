@@ -1,7 +1,7 @@
 import { getCustomer } from "@/app/_actions/getCustomer";
 import { Button } from "@/components/ui/button";
 import { Customer } from "@/lib/types";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 export default async function CustomerData() {
   const customer = (await getCustomer()) as Customer;
