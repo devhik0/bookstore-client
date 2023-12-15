@@ -27,9 +27,9 @@ export const loginUser = async (formData: FormData) => {
 
     const res = (await data.json()) as { token: string };
 
-    console.log("Token: ", res.token);
+    // console.log("Token: ", res.token);
 
-    cookies().set("auth_token", res.token, { sameSite: "strict", secure: true, httpOnly: true });
+    cookies().set("auth_token", res.token, { sameSite: "strict", secure: true });
   } catch (error) {
     console.log(error);
   }

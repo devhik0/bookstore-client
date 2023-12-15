@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,25 +8,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogInIcon, UserPlus } from "lucide-react";
-import { useCookies } from "next-client-cookies";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "../../components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { LogInIcon, UserPlus } from "lucide-react";
+import { useCookies } from "next-client-cookies";
+import Image from "next/image";
+import Link from "next/link";
 import CartSheet from "./cart-sheet";
 
 export default function Navbar() {
   const cookies = useCookies();
+
   const isLogged = cookies.get("auth_token") as string;
 
-  const router = useRouter();
+  // console.log("token in nav: ", isLogged);
+
+  const logout = () => {
+    cookies.remove("auth_token");
+    cookies.remove("query");
+  };
 
   return (
     <NavigationMenu className="bg-accent flex flex-col md:flex-row">
@@ -59,14 +64,20 @@ export default function Navbar() {
         {isLogged && (
           <div
             className={`flex items-center ${!isLogged ? `mr-4 flex-col pt-2` : `flex-row justify-center px-2`}
-            `}
+        `}
           >
             <NavigationMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
-                    <AvatarImage src="/logo.png" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarImage
+                      src="/logo.png"
+                      width={36}
+                      height={36}
+                      alt="user-img"
+                      className="rounded-full object-cover"
+                    />
+                    <AvatarFallback className="text-gray-200">NC</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -75,13 +86,8 @@ export default function Navbar() {
                   <DropdownMenuItem>
                     <Link href={`/customers/my-account`}>Profile</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => {
-                      cookies.remove("auth_token");
-                      router.push("/");
-                    }}
-                  >
-                    Logout
+                  <DropdownMenuItem onClick={logout}>
+                    <Link href={`/`}>Logout</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

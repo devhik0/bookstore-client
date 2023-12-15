@@ -1,8 +1,7 @@
 import { getBook } from "@/app/_actions/getBook";
-import { getRecommendations } from "@/app/_actions/getRecommendations";
+// import { getRecommendations } from "@/app/_actions/getRecommendations";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Book } from "@/lib/types";
 import { XIcon } from "lucide-react";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -11,7 +10,7 @@ import Link from "next/link";
 export default async function Book({ params }: { params: { id: number } }) {
   const book = await getBook(params);
 
-  const recommendations = (await getRecommendations()) as Book[];
+  // const recommendations = (await getRecommendations()) as Book[];
 
   const discountAmount = (book.priceBeforeDiscount * book.discountPercent) / 100;
   const discountedPrice = book.priceBeforeDiscount - discountAmount;
@@ -101,11 +100,18 @@ export default async function Book({ params }: { params: { id: number } }) {
           </SheetContent>
         </Sheet>
       </div>
-      <div>
+      {/* Cuz of no recommendations: */}
+      {/* <div>
         <h3 className="text-lg font-bold">Recommendations</h3>
         <div>
-          {recommendations.length === 0 ? (
-            <>There is no recommendations for this book.</>
+          {!recommendations || recommendations.length === 0 ? (
+            <>
+              There is no recommendations for this book. Please{" "}
+              <Link href={"/login"} className="text-blue-400 underline">
+                login
+              </Link>{" "}
+              to see.
+            </>
           ) : (
             recommendations
               .map((book) => (
@@ -119,76 +125,13 @@ export default async function Book({ params }: { params: { id: number } }) {
                     <p>€{book.priceBeforeDiscount}</p>
                   </div>
                   <div className="flex flex-row items-center gap-2">
-                    {/* <Dialog>
-                      <DialogTrigger asChild>
-                        <Button className="text-xs bg-orange-600" size={"sm"}>
-                          <Pencil size={"1rem"} />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                          <DialogDescription>
-                            This action cannot be undone. This will permanently delete your account and remove your data
-                            from our servers.
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button className="text-xs bg-blue-600" size={"sm"}>
-                          <Upload size={"1rem"} />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Add Cover</DialogTitle>
-                          <DialogDescription>Please upload a image to set book cover</DialogDescription>
-                        </DialogHeader>
-                        <form
-                          action={addCover}
-                          className="border border-gray-400 p-4 flex justify-between items-center"
-                        >
-                          <input type="hidden" name="id" value={book.id} />
-                          <input type="file" name="file" />
-                          <Button type="submit" className="bg-blue-600">
-                            Add Cover
-                          </Button>
-                        </form>
-                      </DialogContent>
-                    </Dialog>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button className="text-xs" variant={"destructive"} size={"sm"}>
-                          <Trash2 size={"1rem"} />
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                          <DialogDescription>
-                            This action cannot be undone. This will permanently delete this book and remove it from our
-                            servers.
-                          </DialogDescription>
-                          <DialogFooter>
-                            <DialogClose asChild>
-                              <Button variant={"secondary"}>Cancel</Button>
-                            </DialogClose>
-                            <form action={deleteBook.bind(null, book.id)}>
-                              <Button variant={"destructive"}>Delete</Button>
-                            </form>
-                          </DialogFooter>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog> */}
                   </div>
                 </div>
               ))
               .reverse()
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

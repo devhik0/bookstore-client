@@ -1,6 +1,7 @@
 "use client";
 
 import { Genre } from "@/lib/types";
+import { useCookies } from "next-client-cookies";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
@@ -9,12 +10,19 @@ export default function Filters({ genres }: { genres: Genre[] }) {
   const [lang, setLang] = useState("");
   const [genre, setGenre] = useState("");
 
+  const cookies = useCookies();
+  const query = cookies.get("query") as string;
+
+  const clearForm = () => {
+    setGenre("");
+    setLang("");
+  };
+
   return (
     <div>
       <form className="flex flex-col justify-center gap-4">
         <div className="flex flex-col justify-around gap-2 p-2">
           <h3>Genre</h3>
-          {/* //todo: genres.map */}
           {genres.map((g) => (
             <label
               key={g.id}
@@ -61,13 +69,13 @@ export default function Filters({ genres }: { genres: Genre[] }) {
             Spanish{" "}
           </label>
         </div>
-        <Link href={`/books?genre=${genre}&language=${lang}`}>
+        <Link href={`/books?searchString=${query}&genre=${genre}&language=${lang}`}>
           <Button type="submit" className="bg-accent w-full text-xs md:text-[1rem]">
             Filter
           </Button>
         </Link>
         <Link href={`/books`}>
-          <Button type="submit" variant={"destructive"} className="w-full text-xs md:text-[1rem]">
+          <Button type="submit" onClick={clearForm} variant={"destructive"} className="w-full text-xs md:text-[1rem]">
             Clear Filters
           </Button>
         </Link>

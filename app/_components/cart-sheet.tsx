@@ -4,6 +4,7 @@ import { ShoppingCart, XIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function CartSheet({ isLogged }: { isLogged: string }) {
+  // console.log("token in cart: ", isLogged);
   return (
     <Sheet>
       <SheetTrigger>

@@ -16,10 +16,10 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
   return (
     <div className="h-[100vh] w-full text-center">
       <div className="flex gap-4">
-        <div className="h-full w-[35vw] border border-green-400 px-2 text-xs md:w-[25vw] md:text-[1rem]">
+        <div className="h-full w-[35vw] px-2 text-xs md:w-[25vw] md:text-[1rem]">
           <Filters genres={genres} />
         </div>
-        <div className="w-[60vw] border border-green-400 md:w-full">
+        <div className="w-[60vw] md:w-full">
           <div className="flex w-[97%] flex-col text-xs md:text-[1rem]">
             <div className="flex flex-col items-center justify-end md:flex-row">
               <Search where="books" />
