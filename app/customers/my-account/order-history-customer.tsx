@@ -1,6 +1,5 @@
 import { getCustomer } from "@/app/_actions/getCustomer";
 import { getOrdersByCustomer } from "@/app/_actions/getOrdersByCustomer";
-import { Button } from "@/components/ui/button";
 import { Customer, Order } from "@/lib/types";
 
 export default async function OrderHistoryCustomer() {
@@ -19,8 +18,6 @@ export default async function OrderHistoryCustomer() {
           ordersByCustomer.map((order) => (
             <div key={order.id} className="m-2 flex flex-col justify-between gap-2 border border-gray-400 p-2">
               <div className="flex justify-between gap-2 border-b border-b-gray-800">
-                <div>{order.id}</div>
-                <div>{order.customerId}</div>
                 <div>
                   <span>{order.createdAt.toString().slice(0, 9)}</span>{" "}
                   <span>{order.createdAt.toString().slice(11, 19)}</span>
@@ -35,10 +32,6 @@ export default async function OrderHistoryCustomer() {
                   </span>
                 </div>
               ))}
-              <div className="flex justify-center gap-4">
-                <Button variant={"destructive"}>Reject</Button>
-                <Button variant={"secondary"}>Approve</Button>
-              </div>
             </div>
           ))
         )}

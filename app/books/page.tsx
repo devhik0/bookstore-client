@@ -10,7 +10,6 @@ import { getGenres } from "../_actions/getGenres";
 
 export default async function Books({ searchParams }: { searchParams: SearchParams }) {
   const books = (await getBooks(searchParams)) as Books;
-
   const genres = (await getGenres()) as Genre[];
 
   return (
