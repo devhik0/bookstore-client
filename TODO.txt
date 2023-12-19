@@ -5,8 +5,9 @@
   -----------------------------
   - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
   
-  - POST /orders [user] 
-  - DELETE /orders/:id [staff]
+  - POST /orders [user] <--- (add to cart)
+  
+  - DELETE /orders/:id [staff] (? user)
   - PATCH /orders/:oid [staff]
 
   *****************************************************

@@ -1,11 +1,35 @@
 import { getCustomer } from "@/app/_actions/getCustomer";
 import { getOrders } from "@/app/_actions/getOrders";
 import { Button } from "@/components/ui/button";
+import { BASE_URL } from "@/lib/constants";
 import { Customer, Order } from "@/lib/types";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export default async function TabOrders() {
   const customer = (await getCustomer()) as Customer;
   const orders = (await getOrders()) as Order[];
+
+  const deleteOrder = async (id: number) => {
+    "use server";
+
+    const token = cookies().get("auth_token")?.value as string;
+
+    try {
+      const data = await fetch(`${BASE_URL}/orders/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!data.ok) {
+        console.log("Error while deleting: ", data.status);
+      } else {
+        console.log("Deleted order: ", id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    revalidatePath("/customers/my-account");
+  };
 
   return (
     <>
@@ -32,7 +56,11 @@ export default async function TabOrders() {
                   </div>
                 ))}
                 <div className="flex justify-center gap-4">
-                  <Button variant={"destructive"}>Reject</Button>
+                  <form action={deleteOrder.bind(null, order.id)}>
+                    <Button variant={"destructive"} type="submit">
+                      Reject
+                    </Button>
+                  </form>
                   <Button variant={"secondary"}>Approve</Button>
                 </div>
               </div>
