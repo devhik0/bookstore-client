@@ -7,12 +7,13 @@ export default async function TabCustomers() {
 
   return (
     <>
-      {customers.map((customer) => (
+      {customers.reverse().map((customer) => (
         <div
           key={customer.id}
           className="m-2 flex flex-row items-center justify-between gap-2 rounded-lg border border-gray-400 p-4"
         >
           <div className="flex w-full flex-row gap-2">
+            <p>{customer.id}</p>
             <p>{customer.fullName}</p>
             <p>{customer.email}</p>
             <p>{customer.password || "******"}</p>

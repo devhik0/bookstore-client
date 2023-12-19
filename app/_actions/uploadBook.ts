@@ -19,8 +19,8 @@ export const uploadBook = async (formData: FormData) => {
   const publisher = formData.get("publisher") as string;
   const yearPublished = formData.get("yearPublished");
   const copiesAvailable = formData.get("copiesAvailable");
-  const authorList = formData.get("author") as string;
-  const genreList = formData.get("genre") as string;
+  const authorList = formData.getAll("author");
+  const genreList = formData.getAll("genre");
   const file = formData.get("file") as File;
 
   const bookData = JSON.stringify({
@@ -33,8 +33,8 @@ export const uploadBook = async (formData: FormData) => {
     publisher,
     yearPublished,
     copiesAvailable,
-    authorNameList: [authorList],
-    genreTagList: [genreList],
+    authorNameList: authorList,
+    genreTagList: genreList,
   });
 
   try {

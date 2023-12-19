@@ -2,16 +2,17 @@
 
 import { BASE_URL } from "@/lib/constants";
 import { Book } from "@/lib/types";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 import { addBookImage } from "./addBookImage";
 
 export const editBook = async (formData: FormData) => {
+  unstable_noStore();
+
   const token = cookies().get("auth_token")?.value as string;
 
   // form fields
   const id = formData.get("id");
-  console.log("edit id: ", id);
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const price = formData.get("price");
@@ -21,8 +22,8 @@ export const editBook = async (formData: FormData) => {
   const publisher = formData.get("publisher") as string;
   const yearPublished = formData.get("yearPublished") as string;
   const copiesAvailable = formData.get("copiesAvailable");
-  const authorList = formData.get("author");
-  const genreList = formData.get("genre");
+  const authorList = formData.getAll("author");
+  const genreList = formData.getAll("genre");
   const file = formData.get("file") as File;
 
   const bookData = JSON.stringify({
@@ -35,8 +36,8 @@ export const editBook = async (formData: FormData) => {
     publisher,
     yearPublished,
     copiesAvailable,
-    authorNameList: [authorList],
-    genreTagList: [genreList],
+    authorNameList: authorList,
+    genreTagList: genreList,
   });
 
   try {
@@ -62,6 +63,6 @@ export const editBook = async (formData: FormData) => {
   } catch (error) {
     console.log("Error at edit: ", error);
   }
-  revalidatePath("/books");
   revalidatePath("/customers/my-account");
+  revalidatePath("/books");
 };

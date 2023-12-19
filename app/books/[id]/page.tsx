@@ -1,7 +1,8 @@
 import { getBook } from "@/app/_actions/getBook";
-// import { getRecommendations } from "@/app/_actions/getRecommendations";
+import { getRecommendations } from "@/app/_actions/getRecommendations";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Book } from "@/lib/types";
 import { XIcon } from "lucide-react";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -10,7 +11,7 @@ import Link from "next/link";
 export default async function Book({ params }: { params: { id: number } }) {
   const book = await getBook(params);
 
-  // const recommendations = (await getRecommendations()) as Book[];
+  const recommendations = (await getRecommendations()) as Book[];
 
   const discountAmount = (book.priceBeforeDiscount * book.discountPercent) / 100;
   const discountedPrice = book.priceBeforeDiscount - discountAmount;
@@ -44,9 +45,9 @@ export default async function Book({ params }: { params: { id: number } }) {
         </div>
         <p className="mt-2 ">{book.description}</p>
         <div className="my-4 flex flex-row items-center gap-2">
-          <span className="line-through">€ {book.priceBeforeDiscount}</span>
+          <span className="line-through">€ {book.priceBeforeDiscount.toPrecision(4)}</span>
           <span className="text-red-500"> -%{book.discountPercent}</span> <br />
-          <span className="">€ {discountedPrice}</span>
+          <span className="">€ {discountedPrice.toPrecision(4)}</span>
           <span className="">{book.copiesAvailable} Copies</span>
         </div>
         <Sheet>
@@ -100,38 +101,51 @@ export default async function Book({ params }: { params: { id: number } }) {
           </SheetContent>
         </Sheet>
       </div>
-      {/* Cuz of no recommendations: */}
-      {/* <div>
-        <h3 className="text-lg font-bold">Recommendations</h3>
-        <div>
-          {!recommendations || recommendations.length === 0 ? (
-            <>
-              There is no recommendations for this book. Please{" "}
-              <Link href={"/login"} className="text-blue-400 underline">
-                login
-              </Link>{" "}
-              to see.
-            </>
-          ) : (
-            recommendations
-              .map((book) => (
-                <div
-                  key={book.id}
-                  className="m-2 flex flex-row items-center justify-between gap-4 rounded-lg border border-gray-200 pr-2"
-                >
-                  <Image src={book.imageLink} width={40} height={40} alt="book-img" />
-                  <div className="flex w-full items-center justify-between">
-                    <p>{book.title}</p>
-                    <p>€{book.priceBeforeDiscount}</p>
-                  </div>
-                  <div className="flex flex-row items-center gap-2">
-                  </div>
-                </div>
-              ))
-              .reverse()
-          )}
+      {isLogged && (
+        <div className="m-2 ">
+          <h3 className="ml-2 text-lg font-bold">Recommendations</h3>
+          <div>
+            {recommendations.length === 0 ? (
+              <div className="ml-2">
+                There is no recommendations for this book. Those will be shown here after you buy some books.
+                {!isLogged && (
+                  <>
+                    Please{" "}
+                    <Link href={"/login"} className="text-blue-400 underline">
+                      login
+                    </Link>{" "}
+                    to see.
+                  </>
+                )}
+              </div>
+            ) : (
+              recommendations
+                .map((recBook) => {
+                  const discountAmountRec = (recBook.priceBeforeDiscount * recBook.discountPercent) / 100;
+                  const discountedPriceRec = recBook.priceBeforeDiscount - discountAmountRec;
+                  return (
+                    <div
+                      key={recBook.id}
+                      className="m-2 flex flex-row items-center justify-between gap-4 rounded-lg border border-gray-200 pr-2"
+                    >
+                      <Image src={recBook.imageLink} width={60} height={60} alt="book-img" />
+                      <Link href={`/books/${recBook.id}`}>
+                        <div className="my-4 flex flex-row items-center gap-2">
+                          <p>{recBook.title}</p>
+                          <span className="line-through">€ {recBook.priceBeforeDiscount}</span>
+                          <span className="text-red-500"> -%{recBook.discountPercent}</span> <br />
+                          <span className="">€ {discountedPriceRec.toPrecision(4)}</span>
+                        </div>
+                      </Link>
+                      <div className="flex flex-row items-center gap-2"></div>
+                    </div>
+                  );
+                })
+                .reverse()
+            )}
+          </div>
         </div>
-      </div> */}
+      )}
     </div>
   );
 }

@@ -3,11 +3,11 @@
 import { editBook } from "@/app/_actions/editBook";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
-import { Book, BookForm } from "@/lib/types";
+import { Book, BookForm, Genre } from "@/lib/types";
 import { Pencil } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 
-export default function EditBookDialog({ book, children }: { book: BookForm; children: ReactNode }) {
+export default function EditBookDialog({ book, genres }: { book: BookForm; genres: Genre[] }) {
   const [title, setTitle] = useState(book.title);
   const [description, setDescription] = useState(book.description);
   const [price, setPrice] = useState(book.priceBeforeDiscount);
@@ -18,20 +18,19 @@ export default function EditBookDialog({ book, children }: { book: BookForm; chi
   const [pubYear, setPubYear] = useState(book.yearPublished);
   const [copies, setCopies] = useState(book.copiesAvailable);
   const [author, setAuthor] = useState(book.authorNameList);
-  // const [genre, setGenre] = useState(book.genreTagList);
+  const [genre, setGenre] = useState(book.genreTagList);
 
   return (
     <div className="flex flex-row items-center gap-2">
       <Dialog>
         <DialogTrigger asChild>
           <Button className="bg-orange-600 text-xs" size={"sm"}>
-            {/* //todo: Add Edit book feature */}
             <Pencil size={"1rem"} />
           </Button>
         </DialogTrigger>
-        <DialogContent className="h-[93vh] bg-orange-300 ">
+        <DialogContent className="h-[95vh] bg-orange-300 ">
           <h3>Edit book</h3>
-          <form action={editBook} className="m-1 grid gap-1 p-1 text-sm">
+          <form action={editBook} className="grid gap-1 text-sm">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="title" className="text-right">
                 Title:
@@ -188,7 +187,24 @@ export default function EditBookDialog({ book, children }: { book: BookForm; chi
               <label htmlFor="desc" className="text-right">
                 Genre:
               </label>
-              {children}
+              <select
+                name="genre"
+                className="col-span-3 rounded-sm p-1"
+                required
+                value={genre}
+                onChange={(e) => {
+                  const options = [...e.target.selectedOptions];
+                  const values = options.map((option) => option.value) as string[];
+                  setGenre(values);
+                }}
+                multiple
+              >
+                {genres.map((genre) => (
+                  <option key={genre.id} value={genre.genre}>
+                    {genre.genre}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">

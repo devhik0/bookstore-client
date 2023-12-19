@@ -13,9 +13,9 @@ export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
             <Plus size={"1rem"} className="" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="h-[93vh] bg-blue-300">
+        <DialogContent className="h-[95vh] bg-blue-300">
           <h3 className="m-0 p-0">Add Book</h3>
-          <form action={uploadBook} className="m-0 grid gap-2 p-1 text-sm">
+          <form action={uploadBook} className="grid gap-1 text-sm">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="title" className="text-right">
                 Title:
@@ -127,7 +127,7 @@ export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">
-                Author:
+                Author(s):
               </label>
               <input
                 type="text"
@@ -141,7 +141,7 @@ export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
               <label htmlFor="desc" className="text-right">
                 Genre:
               </label>
-              <select name="genre" className="col-span-3 rounded-sm p-1" required>
+              <select multiple name="genre" className="col-span-3 rounded-sm p-1" required>
                 {genres.map((genre) => (
                   <option key={genre.id} value={genre.genre}>
                     {genre.genre}

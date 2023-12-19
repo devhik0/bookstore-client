@@ -21,4 +21,5 @@ export const deleteBook = async (id: number) => {
     console.log(error);
   }
   revalidatePath("/customers/my-account");
+  revalidatePath("/books");
 };

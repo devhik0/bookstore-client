@@ -14,6 +14,7 @@
 - Spring Boot
 - Hibernate
 - Subapase
+- OpenAI (book recommendations based on orders)
 
 To run project, first clone and
 for pnpm: install pnpm then,

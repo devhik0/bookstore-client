@@ -1,10 +1,9 @@
 import { getBooks } from "@/app/_actions/getBooks";
 import { getGenres } from "@/app/_actions/getGenres";
-import { Book, Genre } from "@/lib/types";
+import { Book, BookForm, Genre } from "@/lib/types";
 import Image from "next/image";
 import DeleteBookDialog from "./delete-book-dialog";
 import EditBookDialog from "./edit-book-dialog";
-import GenreSelect from "./genre-select";
 import UploadImageDialog from "./upload-image-dialog";
 
 export default async function BookList() {
@@ -24,9 +23,7 @@ export default async function BookList() {
               <p>{book.title}</p>
               <p>€{book.priceBeforeDiscount}</p>
             </div>
-            <EditBookDialog book={book}>
-              <GenreSelect genres={genres} />
-            </EditBookDialog>
+            <EditBookDialog genres={genres} book={book as BookForm} />
             <UploadImageDialog book={book} />
             <DeleteBookDialog book={book} />
           </div>

@@ -1,18 +1,6 @@
 - Implement API
  - Endpoints:
   
-  Books
-  -----------------------------
-  - GET /books, /books/:id [public *] +
-  - POST /books [staff] +             
-  - DELETE /books/:id [staff] +
-  - PATCH /books/:id/cover [staff] +
-  - PUT /books/:id [staff] +
-
-    Recommendations
-    -----------------------------
-    - GET /recommendations [user] + (empty ?) (require order history) <---- 
-
   Order
   -----------------------------
   - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
@@ -22,6 +10,18 @@
   - PATCH /orders/:oid [staff]
 
   *****************************************************
+
+  Books (+)
+  -----------------------------
+  - GET /books, /books/:id [public *] +
+  - POST /books [staff] +             
+  - DELETE /books/:id [staff] +
+  - PATCH /books/:id/cover [staff] +
+  - PUT /books/:id [staff] +
+
+    Recommendations
+    -----------------------------
+    - GET /recommendations [user] +
 
   Genre (+)
   -----------------------------
