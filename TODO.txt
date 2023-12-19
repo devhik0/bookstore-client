@@ -7,37 +7,39 @@
   - POST /books [staff] +             
   - DELETE /books/:id [staff] +
   - PATCH /books/:id/cover [staff] +
+  - PUT /books/:id [staff] +
 
-  - PUT /books/:id [staff] <---------
-
-  Genre
-  -----------------------------
-  - GET /genre-tags, /genre-tags/:id [public *] +
-  - PUT /genre-tags/:id (no need ?) X [staff] +
-
-  Customer
-  -----------------------------
-  - GET /customers, + /customers/:id, + /customers/my-account [user, staff]
-  - POST /customers (signup) [user] +
-  - DELETE /customers/:id [staff] (NOT WORKING ?)
+    Recommendations
+    -----------------------------
+    - GET /recommendations [user] + (empty ?) (require order history) <---- 
 
   Order
   -----------------------------
   - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
+  
   - POST /orders [user] 
   - DELETE /orders/:id [staff]
   - PATCH /orders/:oid [staff]
 
-  Recommendations
+  *****************************************************
+
+  Genre (+)
   -----------------------------
-  - GET /recommendations [user] + (empty ?)
+  - GET /genre-tags, /genre-tags/:id [public *] +
+  - PUT /genre-tags/:id (no need ?) X [staff] +
+
+  Customer (+)
+  -----------------------------
+  - GET /customers, + /customers/:id, + /customers/my-account [user, staff] +
+  - POST /customers (signup) [user] +
+  - DELETE /customers/:id [staff] +
+
+  Auth: JWT - Header Bearer (user, staff) +
 
   //////
   Author (NO NEED)
   -----------------------------
   - GET /authors, /authors/:id [public *]
   - PUT /authors/:id [staff]
-
-  Auth: JWT - Header Bearer (user, staff)
 
 

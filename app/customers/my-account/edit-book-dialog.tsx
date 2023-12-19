@@ -1,13 +1,24 @@
+"use client";
+
 import { editBook } from "@/app/_actions/editBook";
-import { getGenres } from "@/app/_actions/getGenres";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
-import { Book, Genre } from "@/lib/types";
+import { Book, BookForm } from "@/lib/types";
 import { Pencil } from "lucide-react";
+import { ReactNode, useState } from "react";
 
-export default async function EditBookDialog({ book }: { book: Book }) {
-  console.log("Book", book.id);
-  const genres = (await getGenres()) as Genre[];
+export default function EditBookDialog({ book, children }: { book: BookForm; children: ReactNode }) {
+  const [title, setTitle] = useState(book.title);
+  const [description, setDescription] = useState(book.description);
+  const [price, setPrice] = useState(book.priceBeforeDiscount);
+  const [discount, setDiscount] = useState(book.discountPercent);
+  const [language, setLanguage] = useState(book.language);
+  const [numPage, setNumPage] = useState(book.numPages);
+  const [publisher, setPublisher] = useState(book.publisher);
+  const [pubYear, setPubYear] = useState(book.yearPublished);
+  const [copies, setCopies] = useState(book.copiesAvailable);
+  const [author, setAuthor] = useState(book.authorNameList);
+  // const [genre, setGenre] = useState(book.genreTagList);
 
   return (
     <div className="flex flex-row items-center gap-2">
@@ -25,13 +36,14 @@ export default async function EditBookDialog({ book }: { book: Book }) {
               <label htmlFor="title" className="text-right">
                 Title:
               </label>
+              <input type="hidden" name="id" value={book.id} />
               <input
                 name="title"
                 className="col-span-3 rounded-sm p-1"
                 placeholder="Title"
                 required
-                // value={title}
-                // onChange={(e) => setTitle(e.target.value as string)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value as string)}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -45,6 +57,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 cols={10}
                 placeholder="Book desc."
                 required
+                value={description}
+                onChange={(e) => setDescription(e.target.value as string)}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -57,6 +71,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 max={100}
                 className="col-span-3 rounded-sm p-1"
                 placeholder="€ 12.33"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
                 required
               />
             </div>
@@ -71,6 +87,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 min={5}
                 className="col-span-3 rounded-sm p-1"
                 placeholder="% 60"
+                value={discount}
+                onChange={(e) => setDiscount(Number(e.target.value))}
                 required
               />
             </div>
@@ -78,7 +96,14 @@ export default async function EditBookDialog({ book }: { book: Book }) {
               <label htmlFor="desc" className="text-right">
                 Language:
               </label>
-              <select name="language" className="col-span-3 rounded-sm p-1" placeholder="% 60" required>
+              <select
+                name="language"
+                className="col-span-3 rounded-sm p-1"
+                placeholder="% 60"
+                required
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Book["language"])}
+              >
                 <option value={"ENGLISH"}>English</option>
                 <option value={"ROMANIAN"}>Romanian</option>
                 <option value={"SPANISH"}>Spanish</option>
@@ -94,6 +119,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 max={1000}
                 className="col-span-3 rounded-sm p-1"
                 placeholder="300"
+                value={numPage}
+                onChange={(e) => setNumPage(Number(e.target.value))}
                 required
               />
             </div>
@@ -106,6 +133,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 name="publisher"
                 className="col-span-3 rounded-sm p-1"
                 placeholder="X Publishing"
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value as string)}
                 required
               />
             </div>
@@ -120,6 +149,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 max={2023}
                 min={1950}
                 placeholder="2023"
+                value={pubYear}
+                onChange={(e) => setPubYear(Number(e.target.value))}
                 required
               />
             </div>
@@ -134,6 +165,8 @@ export default async function EditBookDialog({ book }: { book: Book }) {
                 placeholder="500"
                 min={1}
                 max={1000}
+                value={copies}
+                onChange={(e) => setCopies(Number(e.target.value))}
                 required
               />
             </div>
@@ -141,19 +174,21 @@ export default async function EditBookDialog({ book }: { book: Book }) {
               <label htmlFor="desc" className="text-right">
                 Author:
               </label>
-              <input type="text" name="author" className="col-span-3 rounded-sm p-1" placeholder="Dan Brown" required />
+              <input
+                type="text"
+                name="author"
+                className="col-span-3 rounded-sm p-1"
+                placeholder="Dan Brown"
+                required
+                value={author}
+                onChange={(e) => setAuthor([e.target.value])}
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">
                 Genre:
               </label>
-              <select name="genre" className="col-span-3 rounded-sm p-1" required>
-                {genres.map((genre) => (
-                  <option key={genre.id} value={genre.genre}>
-                    {genre.genre}
-                  </option>
-                ))}
-              </select>
+              {children}
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">

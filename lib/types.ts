@@ -12,6 +12,8 @@ export type Book = {
   yearPublished: number;
 };
 
+export type BookForm = Book & { authorNameList: string[]; genreTagList: string[] };
+
 export type Books = (Book & { authorNameList: string[]; genreTagList: string[] })[];
 
 export type SearchParams = { searchString?: string; genre?: string; language?: string };

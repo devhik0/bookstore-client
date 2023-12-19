@@ -129,7 +129,13 @@ export default async function AddBookDialog({ genres }: { genres: Genre[] }) {
               <label htmlFor="desc" className="text-right">
                 Author:
               </label>
-              <input type="text" name="author" className="col-span-3 rounded-sm p-1" placeholder="Dan Brown" required />
+              <input
+                type="text"
+                name="author"
+                className="col-span-3 rounded-sm p-1"
+                placeholder="Dan Brown, Another Author"
+                required
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="desc" className="text-right">

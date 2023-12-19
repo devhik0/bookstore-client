@@ -10,6 +10,8 @@ export const editBook = async (formData: FormData) => {
   const token = cookies().get("auth_token")?.value as string;
 
   // form fields
+  const id = formData.get("id");
+  console.log("edit id: ", id);
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const price = formData.get("price");
@@ -17,10 +19,10 @@ export const editBook = async (formData: FormData) => {
   const numPages = formData.get("numPages");
   const language = formData.get("language") as Book["language"];
   const publisher = formData.get("publisher") as string;
-  const yearPublished = formData.get("yearPublished");
+  const yearPublished = formData.get("yearPublished") as string;
   const copiesAvailable = formData.get("copiesAvailable");
-  const authorList = formData.get("author") as string;
-  const genreList = formData.get("genre") as string;
+  const authorList = formData.get("author");
+  const genreList = formData.get("genre");
   const file = formData.get("file") as File;
 
   const bookData = JSON.stringify({
@@ -38,7 +40,7 @@ export const editBook = async (formData: FormData) => {
   });
 
   try {
-    const data = await fetch(`${BASE_URL}/books`, {
+    const data = await fetch(`${BASE_URL}/books/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: bookData,
