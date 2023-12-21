@@ -1,9 +1,11 @@
+"use server";
+
 import { BASE_URL } from "@/lib/constants";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 
 export const deleteOrder = async (id: number) => {
-  "use server";
+  unstable_noStore();
 
   const token = cookies().get("auth_token")?.value as string;
 
@@ -20,5 +22,6 @@ export const deleteOrder = async (id: number) => {
   } catch (error) {
     console.log(error);
   }
+  revalidatePath("/cart");
   revalidatePath("/customers/my-account");
 };

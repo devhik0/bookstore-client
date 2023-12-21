@@ -7,7 +7,7 @@ export type BookDetails = Book & { authorNameList: string[]; genreTagList: strin
 export const getBook = async (params: { id: number }) => {
   unstable_noStore();
 
-  console.log("book id: ", params.id);
+  // console.log("book id: ", params.id);
 
   const data = await fetch(`${BASE_URL}/books/${params.id}`);
   const book = (await data.json()) as BookDetails;

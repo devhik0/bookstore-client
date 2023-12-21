@@ -1,17 +1,19 @@
 "use server";
 
 import { BASE_URL } from "@/lib/constants";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 
-export const sendOrder = async () => {
+export const sendOrder = async (formData: FormData) => {
+  unstable_noStore();
+
   const token = cookies().get("auth_token")?.value as string;
 
   const orderData = JSON.stringify({
     orderItems: [
       {
-        bookId: 9,
-        quantity: 10,
+        bookId: formData.get("id"),
+        quantity: 1,
       },
     ],
   });
@@ -31,4 +33,5 @@ export const sendOrder = async () => {
     console.log("Error at add: ", error);
   }
   revalidatePath("/cart");
+  revalidatePath("/customers/my-account");
 };

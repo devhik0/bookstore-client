@@ -24,6 +24,7 @@ export default async function RecommCard({ isLogged }: { isLogged: string }) {
             )}
           </div>
         ) : (
+          recommendations &&
           recommendations
             .map((recBook) => {
               const discountAmountRec = (recBook.priceBeforeDiscount * recBook.discountPercent) / 100;
