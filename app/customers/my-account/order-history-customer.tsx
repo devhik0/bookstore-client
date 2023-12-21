@@ -9,10 +9,7 @@ export default async function OrderHistoryCustomer() {
   const customer = (await getCustomer()) as Customer;
   const ordersByCustomer = (await getOrdersByCustomer(customer.id)) as Order[];
 
-  console.log(
-    "Orders by customer: ",
-    ordersByCustomer.filter((order) => order.orderStatus === "IN_PROGRESS")
-  );
+  // console.log("Orders by customer: ", ordersByCustomer);
 
   return (
     <div className="w-full">
