@@ -4,11 +4,10 @@
   Order
   -----------------------------
   - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
+  - DELETE /orders/:id [user] +
+  - PATCH /orders/:oid [staff] (complete/approve order) +
   
   - POST /orders [user] <--- (add to cart)
-  
-  - DELETE /orders/:id [staff] (? user)
-  - PATCH /orders/:oid [staff]
 
   *****************************************************
 
@@ -33,7 +32,8 @@
   -----------------------------
   - GET /customers, + /customers/:id, + /customers/my-account [user, staff] +
   - POST /customers (signup) [user] +
-  - DELETE /customers/:id [staff] +
+
+  !! - DELETE /customers/:id [user, staff] -, +  (when user deletes account, it throws error at backend) !!
 
   Auth: JWT - Header Bearer (user, staff) +
 

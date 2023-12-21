@@ -2,6 +2,7 @@ import { getCustomer } from "@/app/_actions/getCustomer";
 import { Button } from "@/components/ui/button";
 import { Customer } from "@/lib/types";
 import Link from "next/link";
+import DeleteCustomerDialog from "./delete-customer-dialog";
 
 export default async function CustomerData() {
   const customer = (await getCustomer()) as Customer;
@@ -24,13 +25,16 @@ export default async function CustomerData() {
       </div>
       <p>Full Name: {customer.fullName}</p>
       <p>Address: {customer.address}</p>
-      <Link href={`/customers/${customer.id}/staff-orders`}>
-        {customer.role === "ROLE_STAFF" ? (
-          <Button className="bg-blue-400">Staff Orders</Button>
-        ) : (
-          <Button className="bg-accent">Orders</Button>
-        )}
-      </Link>
+      <div className="mt-2 flex flex-row items-center gap-2">
+        <Link href={`/customers/${customer.id}/staff-orders`}>
+          {customer.role === "ROLE_STAFF" ? (
+            <Button className="bg-blue-400">Staff Orders</Button>
+          ) : (
+            <Button className="bg-accent">Orders</Button>
+          )}
+        </Link>
+        <DeleteCustomerDialog customer={customer} />
+      </div>
     </div>
   );
 }

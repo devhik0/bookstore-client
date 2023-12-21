@@ -1,25 +1,24 @@
 "use server";
 
 import { BASE_URL } from "@/lib/constants";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export const sendOrder = async () => {
+  const token = cookies().get("auth_token")?.value as string;
+
   const orderData = JSON.stringify({
-    customerId: 54,
     orderItems: [
       {
-        bookId: 554,
-        quantity: 3,
-      },
-      {
-        bookId: 703,
-        quantity: 1,
+        bookId: 9,
+        quantity: 10,
       },
     ],
   });
   try {
-    const data = await fetch(`${BASE_URL}/orders/54`, {
+    const data = await fetch(`${BASE_URL}/orders`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: orderData,
     });
     if (!data.ok) {
@@ -31,4 +30,5 @@ export const sendOrder = async () => {
   } catch (error) {
     console.log("Error at add: ", error);
   }
+  revalidatePath("/cart");
 };

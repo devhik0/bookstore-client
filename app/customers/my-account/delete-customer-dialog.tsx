@@ -18,7 +18,8 @@ export default async function DeleteCustomerDialog({ customer }: { customer: Cus
     <Dialog>
       <DialogTrigger asChild>
         <Button className="text-xs" variant={"destructive"} size={"sm"}>
-          <Trash2 size={"1rem"} />
+          <Trash2 size={"1rem"} className="mr-2" />
+          Remove Account
         </Button>
       </DialogTrigger>
       <DialogContent>

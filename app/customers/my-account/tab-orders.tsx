@@ -1,70 +1,110 @@
+import { approveOrder } from "@/app/_actions/approveOrder";
 import { getCustomer } from "@/app/_actions/getCustomer";
 import { getOrders } from "@/app/_actions/getOrders";
 import { Button } from "@/components/ui/button";
-import { BASE_URL } from "@/lib/constants";
 import { Customer, Order } from "@/lib/types";
-import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 
 export default async function TabOrders() {
   const customer = (await getCustomer()) as Customer;
   const orders = (await getOrders()) as Order[];
 
-  const deleteOrder = async (id: number) => {
-    "use server";
-
-    const token = cookies().get("auth_token")?.value as string;
-
-    try {
-      const data = await fetch(`${BASE_URL}/orders/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!data.ok) {
-        console.log("Error while deleting: ", data.status);
-      } else {
-        console.log("Deleted order: ", id);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    revalidatePath("/customers/my-account");
-  };
-
   return (
     <>
       {customer.role === "ROLE_STAFF" && (
-        <div className="mx-auto my-4 w-[80%] border border-gray-400 p-2">
+        <div className="mx-auto my-4 w-[80%] p-2">
           <div className="w-full">
-            {orders.map((order) => (
-              <div key={order.id} className="m-2 flex flex-col justify-between gap-2 border border-gray-400 p-2">
-                <div className="flex justify-between gap-2 border-b border-b-gray-800">
-                  <div>{order.id}</div>
-                  <div>{order.customerId}</div>
-                  <div>
-                    <span>{order.createdAt.toString().slice(0, 9)}</span>{" "}
-                    <span>{order.createdAt.toString().slice(11, 19)}</span>
+            {orders
+              .reverse()
+              .filter((order) => order.orderStatus === "COMPLETED")
+              .map((order) => (
+                <div
+                  key={order.id}
+                  className={
+                    order.orderStatus !== "COMPLETED"
+                      ? `m-2 flex flex-col justify-between gap-2 border border-gray-300 p-2`
+                      : `m-2 flex flex-row items-center gap-2 border border-gray-100 bg-green-100 p-2`
+                  }
+                >
+                  <div
+                    className={
+                      order.orderStatus !== "COMPLETED"
+                        ? `flex justify-between gap-2 border-b border-b-gray-400`
+                        : `flex justify-between gap-2 border-none`
+                    }
+                  >
+                    <div>{order.id}</div>
+                    <div>{order.customerId}</div>
+                    <div>
+                      <span>{order.createdAt.toString().slice(0, 9)}</span>{" "}
+                      <span>{order.createdAt.toString().slice(11, 19)}</span>
+                    </div>
+                    <div>{order.orderStatus}</div>
                   </div>
-                  <div>{order.orderStatus}</div>
+                  <h3>Order Items</h3>
+                  {order.orderItems.map((item) => (
+                    <div key={item.id}>
+                      <span>
+                        {item.bookId} x {item.quantity}
+                      </span>
+                    </div>
+                  ))}
+                  {order.orderStatus === "IN_PROGRESS" && (
+                    <div className="flex justify-center">
+                      <form action={approveOrder.bind(null, order.id)}>
+                        <Button type="submit" className=" bg-green-600">
+                          Approve
+                        </Button>
+                      </form>
+                    </div>
+                  )}
                 </div>
-                <h3>Order Items</h3>
-                {order.orderItems.map((item) => (
-                  <div key={item.id}>
-                    <span>
-                      {item.bookId} x {item.quantity}
-                    </span>
+              ))}
+            {orders
+              .reverse()
+              .filter((order) => order.orderStatus !== "COMPLETED")
+              .map((order) => (
+                <div
+                  key={order.id}
+                  className={
+                    order.orderStatus !== "CANCELED"
+                      ? `m-2 flex flex-col justify-between gap-2 border border-gray-300 p-2`
+                      : `m-2 flex flex-row items-center gap-2 border border-gray-100 bg-red-100 p-2`
+                  }
+                >
+                  <div
+                    className={
+                      order.orderStatus !== "CANCELED"
+                        ? `flex justify-between gap-2 border-b border-b-gray-400`
+                        : `flex justify-between gap-2 border-none`
+                    }
+                  >
+                    <div>{order.id}</div>
+                    <div>{order.customerId}</div>
+                    <div>
+                      <span>{order.createdAt.toString().slice(0, 9)}</span>{" "}
+                      <span>{order.createdAt.toString().slice(11, 19)}</span>
+                    </div>
+                    <div>{order.orderStatus}</div>
                   </div>
-                ))}
-                <div className="flex justify-center gap-4">
-                  <form action={deleteOrder.bind(null, order.id)}>
-                    <Button variant={"destructive"} type="submit">
-                      Reject
-                    </Button>
-                  </form>
-                  <Button variant={"secondary"}>Approve</Button>
+                  <h3>Order Items</h3>
+                  {order.orderItems.map((item) => (
+                    <div key={item.id}>
+                      <span>
+                        {item.bookId} x {item.quantity}
+                      </span>
+                    </div>
+                  ))}
+                  {order.orderStatus !== "CANCELED" && (
+                    <div className="flex justify-center">
+                      <form action={approveOrder.bind(null, order.id)}>
+                        <Button type="submit" className=" bg-green-600">
+                          Approve
+                        </Button>
+                      </form>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       )}
