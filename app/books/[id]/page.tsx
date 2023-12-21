@@ -1,4 +1,5 @@
 import { getBook } from "@/app/_actions/getBook";
+import { getCustomer } from "@/app/_actions/getCustomer";
 import CartSheet from "@/app/_components/cart-sheet";
 import RecommCard from "@/app/customers/my-account/recomm-card";
 import { cookies } from "next/headers";
@@ -11,6 +12,8 @@ export default async function Book({ params }: { params: { id: number } }) {
   const discountedPrice = book.priceBeforeDiscount - discountAmount;
 
   const isLogged = cookies().get("auth_token")?.value as string;
+
+  const customer = await getCustomer();
 
   return (
     <div className="flex flex-row gap-4">
@@ -44,9 +47,17 @@ export default async function Book({ params }: { params: { id: number } }) {
           <span className="">€ {discountedPrice.toPrecision(4)}</span>
           <span className="">{book.copiesAvailable} Copies</span>
         </div>
-        <CartSheet isLogged={isLogged} />
+        {customer.role !== "ROLE_STAFF" && (
+          <div className="w-[10%] bg-gray-600">
+            <CartSheet isLogged={isLogged} />
+          </div>
+        )}
       </div>
-      {isLogged && <RecommCard isLogged={isLogged} />}
+      {isLogged && (
+        <div className="w-[90%]">
+          <RecommCard isLogged={isLogged} />
+        </div>
+      )}
     </div>
   );
 }
