@@ -14,7 +14,7 @@ export const getRecommendations = async () => {
     if (!data.ok) {
       console.log("Error while getting recommendations: ", data.status);
     } else {
-      console.log("Recomm: ", recomm);
+      // console.log("Recomm: ", recomm);
       return recomm;
     }
   } catch (error) {

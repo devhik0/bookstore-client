@@ -2,6 +2,7 @@ import { getBook } from "@/app/_actions/getBook";
 import { getCustomer } from "@/app/_actions/getCustomer";
 import CartSheet from "@/app/_components/cart-sheet";
 import RecommCard from "@/app/customers/my-account/recomm-card";
+import { Button } from "@/components/ui/button";
 import { cookies } from "next/headers";
 import Image from "next/image";
 
@@ -14,6 +15,12 @@ export default async function Book({ params }: { params: { id: number } }) {
   const isLogged = cookies().get("auth_token")?.value as string;
 
   const customer = await getCustomer();
+
+  const addToCart = async (formData: FormData) => {
+    "use server";
+
+    return formData;
+  };
 
   return (
     <div className="flex flex-row gap-4">
@@ -48,13 +55,23 @@ export default async function Book({ params }: { params: { id: number } }) {
           <span className="">{book.copiesAvailable} Copies</span>
         </div>
         {customer.role !== "ROLE_STAFF" && (
-          <div className="w-[10%] bg-gray-600">
-            <CartSheet isLogged={isLogged} />
-          </div>
+          <form action={addToCart} className="flex flex-row items-center gap-2">
+            <div className="bg-accent ml-2 flex w-[20%] flex-row items-center rounded-lg px-2">
+              <Button variant={"ghost"}>Add to Cart</Button>
+              <CartSheet isLogged={isLogged} />
+            </div>
+            <div className="border border-gray-200 p-2">
+              <input type="hidden" value={book.id} name="id" />
+              <label className="flex flex-row gap-2">
+                Quantity:
+                <input type="number" name="qty" className="w-[20%] border border-orange-800" min={1} />
+              </label>
+            </div>
+          </form>
         )}
       </div>
       {isLogged && (
-        <div className="w-[90%]">
+        <div className="w-[40%]">
           <RecommCard isLogged={isLogged} />
         </div>
       )}

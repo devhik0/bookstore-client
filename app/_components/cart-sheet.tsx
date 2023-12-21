@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCart, XIcon } from "lucide-react";
@@ -8,7 +10,7 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
   return (
     <Sheet>
       <SheetTrigger>
-        <ShoppingCart color="white" className="m-4" size={"2rem"} />
+        <ShoppingCart color="white" className="m-4" size={"1.5rem"} />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -18,25 +20,13 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
               <div className="h-full overflow-y-scroll">
                 <div className=" flex items-center justify-between gap-4">
                   <div className="flex w-full flex-col">
-                    {[
-                      { name: "Horizon Zero Dawn", qty: 5 },
-                      { name: "Hunger Games", qty: 1 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                      { name: "Origin", qty: 3 },
-                    ].map((item, ix) => (
+                    {[{ bookId: 3, quantity: 5 }].map((item) => (
                       <div
-                        key={ix}
+                        key={item.bookId}
                         className="my-1 flex w-full flex-row items-center justify-between gap-2 border-b border-b-gray-200 p-2 hover:bg-orange-200"
                       >
                         <span className="m-2">
-                          {item.name} x {item.qty}
+                          {item.bookId} x {item.quantity}
                         </span>
                         <XIcon color="#f87171" className="mr-2" />
                       </div>
