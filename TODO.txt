@@ -1,15 +1,5 @@
-- Implement API
+- Implement API +
  - Endpoints:
-  
-  Order
-  -----------------------------
-  - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
-  - DELETE /orders/:id [user] +
-  - PATCH /orders/:oid [staff] (complete/approve order) +
-  
-  - POST /orders [user] <--- (add to cart)
-
-  *****************************************************
 
   Books (+)
   -----------------------------
@@ -35,6 +25,13 @@
 
   !! - DELETE /customers/:id [user, staff] -, +  (when user deletes account, it throws error at backend) !!
 
+  Order (+)
+  -----------------------------
+  - GET /orders, /orders/:oid, /orders/customers/:cid [user, staff] +
+  - DELETE /orders/:id [user] +
+  - PATCH /orders/:oid [staff] (complete/approve order) +
+  - POST /orders [user] + 
+
   Auth: JWT - Header Bearer (user, staff) +
 
   //////
@@ -43,4 +40,26 @@
   - GET /authors, /authors/:id [public *]
   - PUT /authors/:id [staff]
 
+-------------------------------------------------------------------------------------
+- Make fully responsive for mobile and web (first mobile, then web) <---
 
+- Apply security practices (validation(zod + rhk form), protection(CSP, XSS..) ...)
+
+- Add 3 level tests(unit, int, e2e) 
+
+- Add CI/CD tools
+
+(after finish)
+--------------
+- Clean and refactor code
+
+- Polish UI and enhance
+
+- Optimize for performance
+
+- Make cross browser tests
+
+- Make lighthouse tests for all pages 
+
+- Fix bugs
+...

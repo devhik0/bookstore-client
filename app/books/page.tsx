@@ -1,7 +1,6 @@
 import Search from "@/app/_components/search";
 import Filters from "@/app/books/filters";
 import Sorts from "@/app/books/sorts";
-import { CardTitle } from "@/components/ui/card";
 import { Books, Genre, SearchParams } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +23,7 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
               <Search where="books" />
               <Sorts />
             </div>
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+            <div className="my-2 flex flex-wrap justify-center gap-2 md:gap-4">
               {books.length === 0 ? (
                 <>There is no book here.</>
               ) : (
@@ -33,17 +32,21 @@ export default async function Books({ searchParams }: { searchParams: SearchPara
                     <Link
                       href={`/books/${book.id}`}
                       key={book.id}
-                      className="mt-2 flex w-[40vw] flex-col rounded-lg border border-gray-400 md:w-[15vw]"
+                      className="flex max-h-[320px] w-[200px] flex-col items-center justify-between gap-2 border border-gray-200 p-2 duration-300 ease-in hover:border-orange-800"
                     >
-                      <Image src={book.imageLink} width={210} height={210} alt="book-img" />
-                      <div className="p-4">
-                        <CardTitle>{book.publisher}</CardTitle>
+                      <div className="flex h-[150px] w-[110px] items-center justify-center p-2">
+                        <Image
+                          src={book.imageLink}
+                          width={100}
+                          height={100}
+                          alt="book-img"
+                          className="object-contain"
+                        />
                       </div>
-                      <div className="p-2">
-                        <p className="p-2">{book.title}</p>
-                      </div>
-                      <div className="justify-center p-2">
-                        <p className="font-bold">{book.priceBeforeDiscount} €</p>
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <h4 className="py-2  font-bold">{book.publisher}</h4>
+                        <p className=" p-2 ">{book.title}</p>
+                        <p className=" text-lg font-bold">€ {book.priceBeforeDiscount}</p>
                       </div>
                     </Link>
                   );

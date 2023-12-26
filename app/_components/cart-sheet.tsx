@@ -26,7 +26,7 @@ export default function CartSheet({ isLogged }: { isLogged: string }) {
     const getOrders = async () => {
       const customer = await getCustomer();
       const orders = (await getOrdersByCustomer(customer.id)) as Order[];
-      console.log("orders here: ", orders);
+      // console.log("orders here: ", orders);
       setCart(orders);
     };
     getOrders();

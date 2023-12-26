@@ -75,7 +75,7 @@ export default function Filters({ genres }: { genres: Genre[] }) {
           </Button>
         </Link>
         <Link href={`/books`}>
-          <Button type="submit" onClick={clearForm} variant={"destructive"} className="w-full text-xs md:text-[1rem]">
+          <Button type="submit" onClick={clearForm} className="w-full bg-red-600 text-xs md:text-[1rem]">
             Clear Filters
           </Button>
         </Link>

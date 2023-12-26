@@ -12,7 +12,7 @@ export default function Search({ where }: { where?: "home" | "books" }) {
   const cookies = useCookies();
 
   return (
-    <form className="flex items-center justify-between p-4">
+    <form className="flex w-[35%] justify-between p-4">
       <div id={where} className="flex w-full items-center gap-2 border border-orange-800 p-2">
         <input
           name="query"

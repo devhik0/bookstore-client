@@ -62,7 +62,7 @@ export default function Navbar() {
         )}
 
         {isLogged && (
-          <div
+          <ul
             className={`flex items-center ${!isLogged ? `mr-4 flex-col pt-2` : `flex-row justify-center px-2`}
         `}
           >
@@ -96,7 +96,7 @@ export default function Navbar() {
             <NavigationMenuItem>
               <CartSheet isLogged={isLogged} />
             </NavigationMenuItem>
-          </div>
+          </ul>
         )}
       </NavigationMenuList>
     </NavigationMenu>

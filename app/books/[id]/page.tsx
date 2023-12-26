@@ -5,6 +5,7 @@ import RecommCard from "@/app/customers/my-account/recomm-card";
 import { Button } from "@/components/ui/button";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default async function Book({ params }: { params: { id: number } }) {
   const book = await getBook(params);
@@ -19,7 +20,7 @@ export default async function Book({ params }: { params: { id: number } }) {
   return (
     <div className="flex flex-row gap-4">
       <div>
-        <Image src={book.imageLink} alt="book-img" width={1000} height={100} className="h-[30%] w-[20%]" />
+        <Image src={book.imageLink} alt="book-img" width={100} height={170} />
         <h3 className="mt-2 text-lg">{book.title}</h3>
         <div className="py-2">
           {book.authorNameList.map((author, idx) => (
@@ -44,7 +45,7 @@ export default async function Book({ params }: { params: { id: number } }) {
         <p className="mt-2 ">{book.description}</p>
         <div className="my-4 flex flex-row items-center gap-2">
           <span className="line-through">€ {book.priceBeforeDiscount.toPrecision(4)}</span>
-          <span className="text-red-500"> -%{book.discountPercent}</span> <br />
+          <span className="text-red-600"> -%{book.discountPercent}</span> <br />
           <span className="">€ {discountedPrice.toPrecision(4)}</span>
           <span className="">{book.copiesAvailable} Copies</span>
         </div>
@@ -57,7 +58,9 @@ export default async function Book({ params }: { params: { id: number } }) {
       </div>
       {isLogged && (
         <div className="w-[40%]">
-          <RecommCard isLogged={isLogged} />
+          <Suspense fallback={<>Loading recommendations</>}>
+            <RecommCard isLogged={isLogged} />
+          </Suspense>
         </div>
       )}
     </div>
