@@ -23,4 +23,4 @@ To run project:
 - Install deps via `pnpm i` or `npm i` (pnpm recommended)
 - Start dev server via `pnpm dev` or `npm dev`
 - Follow other scripts in `package.json` to build and others.
-* Note: Because of its strongly dependent on backend API it will look like crashing due to fetch error but dont worry its intentional as a security step. For further info refer to me via opening an issue or reaching directly to him.
+* Note: Because of its strongly dependent on backend API it will look like crashing due to fetch error but dont worry its intentional as a security step. For further info refer to me via opening an issue or reaching directly.
