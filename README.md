@@ -1,3 +1,5 @@
+
+
 # This is a Bookstore web app written in Typescript and Java
 
 ## Technologies used:
@@ -9,7 +11,7 @@
 - ShadcnUI
 - Lucide Icons
 
-### Backend
+### Backend (thanks for @adrianpush)
 
 - Spring Boot
 - Hibernate
