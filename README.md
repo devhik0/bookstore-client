@@ -11,7 +11,7 @@
 - ShadcnUI
 - Lucide Icons
 
-### Backend (thanks for @adrianpush)
+### Backend (thanks to @adrianpush)
 
 - Spring Boot
 - Hibernate
