@@ -18,10 +18,9 @@
 - Subapase
 - OpenAI (book recommendations based on orders)
 
-To run project, first clone and
-for pnpm: install pnpm then,
-`pnpm run dev` for dev server
-`pnpm run build && pnpm run start` for build server.
-
-for npm:
-`npm run dev`, `npm run build && npm run start`
+To run project:
+- Clone
+- Install deps via `pnpm i` or `npm i` (pnpm recommended)
+- Start dev server via `pnpm dev` or `npm dev`
+- Follow other scripts in `package.json` to build and others.
+* Note: Because of its strongly dependent on backend API it will look like crashing due to fetch error but dont worry its intentional as a security step. For further info refer to me via opening an issue or reaching directly to him.
